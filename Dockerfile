@@ -1,5 +1,5 @@
 ARG REGISTRY_URI
-FROM ${REGISTRY_URI}/node:lts-alpine3.16.1 as build
+FROM ${REGISTRY_URI}/node:lts-alpine3.16.2 as build
 
 WORKDIR /app
 COPY package.json ./
