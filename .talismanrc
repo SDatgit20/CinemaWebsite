@@ -5,5 +5,5 @@ fileignoreconfig:
 - filename: src/components/profile/Profile.js
   checksum: 3b46fb717ae270a8fdcdc44ab06a145ede35f2902bd125b55343daaab2e5287b
 - filename: src/components/profile/ChangePasswordDialog.js
-  checksum: 4aba03d94214421527682228d2185a44ad1ba47eff2bd90cb7b17f105205b90d
-version: ""
+  checksum: ec166a1235c74166618b7dc72b315c020b7e6be43818f476ee2e9fdfdf567b17
+  version: ""

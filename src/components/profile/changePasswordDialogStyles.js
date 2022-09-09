@@ -5,7 +5,7 @@ export default makeStyles((theme) =>
         dialogRoot: {
             overflow: "hidden",
             minHeight: "30vh",
-            maxHeight: "80vh"
+            maxHeight: "100vh"
         },
         container: {
             display: "flex",
