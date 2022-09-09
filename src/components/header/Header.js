@@ -24,13 +24,11 @@ const Header = ({onLogout, isAuthenticated}) => {
     const userSection = () => {
         if (isAuthenticated) {
             return (
-                <div>
+                <>
                     <a href="/profile">
-                      <div className={classes.personIcon}>
-                        <Person/>
-                      </div>
+                      <Person className={classes.personIcon}/>
                     </a>
-                </div>
+                </>
             );
         }
     };
