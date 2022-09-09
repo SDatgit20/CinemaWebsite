@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Dialog, Typography } from "@material-ui/core";
+import { Button } from "@material-ui/core";
 import ChangePasswordDialog from "./ChangePasswordDialog";
 import styles from "./changePasswordDialogStyles";
 

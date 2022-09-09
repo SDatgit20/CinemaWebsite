@@ -1,15 +1,11 @@
 import React, { useState } from "react";
 import {
-  Avatar,
   Button,
   Dialog,
   Typography,
   TextField,
-  Input,
 } from "@material-ui/core";
 import styles from "./changePasswordDialogStyles";
-import { ValidationError } from "yup";
-import { logout } from "../../helpers/authService";
 
 export default ({ open, onClose, isAuthenticated }) => {
   const [oldPassword, setOldPassword] = useState("");
@@ -34,20 +30,7 @@ export default ({ open, onClose, isAuthenticated }) => {
     console.log(data);
   };
 
-  const validation = () => {
-    var minMaxLength = /^[\s\S]{8,64}$/,
-      upper = /[A-Z]/,
-      number = /[0-9]/,
-      special = /[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]/;
-    if (
-      minMaxLength.test(newPassword) &&
-      upper.test(newPassword) &&
-      number.test(newPassword) &&
-      special.test(newPassword)
-    )
-      return true;
-  };
-
+  
   return (
     <Dialog
       open={open}
