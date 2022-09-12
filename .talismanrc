@@ -2,8 +2,6 @@ fileignoreconfig:
 - filename: src/config/env-config.js
   checksum: fbf08d3f2f76031ac28ca5cb7c65294ba0d4de6c07d9f248f69e9dc9a417b69f
   ignore_detectors: [filename]
-- filename: src/components/profile/Profile.js
-  checksum: 3b46fb717ae270a8fdcdc44ab06a145ede35f2902bd125b55343daaab2e5287b
 - filename: src/components/profile/ChangePasswordDialog.js
   checksum: ec166a1235c74166618b7dc72b315c020b7e6be43818f476ee2e9fdfdf567b17
 - filename: src/components/profile/Profile.js
