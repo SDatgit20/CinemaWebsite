@@ -1,16 +1,16 @@
-import React, {useEffect} from "react";
-import {Form, Formik} from "formik";
-import {FormikTextField} from "../formik";
-import {Button} from "@material-ui/core";
+import React, { useEffect } from "react";
+import { Form, Formik } from "formik";
+import { FormikTextField } from "../formik";
+import { Button } from "@material-ui/core";
 import styles from "./styles/loginStyles"
 import PropTypes from "prop-types";
 import useLogin from "./hooks/useLogin";
-import {formSchema, initialValues} from "./services/loginFormService";
+import { formSchema, initialValues } from "./services/loginFormService";
 
-const Login = ({location, history, isAuthenticated, onLogin}) => {
+const Login = ({ location, history, isAuthenticated, onLogin }) => {
     const classes = styles();
-    const {from} = location.state || {from: {pathname: "/"}};
-    const {errorMessage, handleLogin} = useLogin(onLogin);
+    const { from } = location.state || { from: { pathname: "/" } };
+    const { errorMessage, handleLogin } = useLogin(onLogin);
 
     useEffect(() => {
         if (isAuthenticated) {
@@ -21,8 +21,8 @@ const Login = ({location, history, isAuthenticated, onLogin}) => {
     return (
         <div className={classes.loginContainer}>
             <Formik initialValues={initialValues}
-                    onSubmit={handleLogin}
-                    validationSchema={formSchema}>
+                onSubmit={handleLogin}
+                validationSchema={formSchema}>
                 {
                     (props) => {
                         const {
