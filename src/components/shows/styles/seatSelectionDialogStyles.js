@@ -5,11 +5,11 @@ export default makeStyles((theme) =>
         dialogRoot: {
             overflow: "hidden",
             minHeight: "30vh",
-            maxHeight: "80vh"
+            maxHeight: "80vh",
         },
         container: {
             display: "flex",
-            flexDirection: "column"
+            flexDirection: "column",
         },
         dialogHeader: {
             fontWeight: "bold",

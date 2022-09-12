@@ -1,5 +1,4 @@
 import {Avatar, Button, Dialog, Typography} from "@material-ui/core";
-import LocalMoviesIcon from "@material-ui/icons/LocalMovies";
 import TextField from "@material-ui/core/TextField";
 import React, {useState} from "react";
 import styles from "./styles/seatSelectionDialogStyles"
@@ -29,7 +28,7 @@ const SeatSelectionDialog = ({selectedShow, updateShowsRevenue, open, onClose}) 
                     <div className={classes.dialogContent}>
                         <div className={classes.moviePicture}>
                             <Avatar>
-                                <LocalMoviesIcon/>
+                            <img src={selectedShow.movie.posterUrl} alt="Poster" height="40px" width="40px"></img>  
                             </Avatar>
                         </div>
                         <div className={classes.dialogMain}>

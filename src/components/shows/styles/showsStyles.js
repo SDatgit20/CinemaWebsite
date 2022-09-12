@@ -6,6 +6,9 @@ export default makeStyles((theme) =>
             display: "flex",
             justifyContent: "space-between"
         },
+        showDetails:{
+            width:"70%"
+        },
         showContainer: {
             "& :hover": {
                 backgroundColor: "#f9f8fd",
@@ -36,7 +39,8 @@ export default makeStyles((theme) =>
         },
         slotTime: {
             color: theme.palette.primary.main,
-            fontWeight: "bold"
+            fontWeight: "bold",
+            width:"20%"
         },
         buttons: {
             display: "flex",
