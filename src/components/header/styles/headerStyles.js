@@ -27,6 +27,14 @@ export default makeStyles((theme) => ({
         cartButton: {
             color: "white",
             padding: "10px"
+        },
+        personIcon:{
+            display: "flex",
+            flexDirection:"row",
+            justifyContent: "flex-start",
+            alignItems: "center",
+            cursor: "pointer",
+            color: theme.palette.primary.contrastText
         }
     })
 );
