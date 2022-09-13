@@ -1,5 +1,5 @@
 import React from "react";
-import {fireEvent, render} from "@testing-library/react";
+import {fireEvent, queryByAttribute, render} from "@testing-library/react";
 import SeatSelectionDialog from "./SeatSelectionDialog";
 
 jest.mock("./CustomerDetailsDialog", () => {

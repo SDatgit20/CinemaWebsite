@@ -1,5 +1,5 @@
 import React from "react";
-import {fireEvent, render} from "@testing-library/react";
+import {fireEvent, getAllByAltText, render} from "@testing-library/react";
 import Shows from "./Shows";
 import {when} from "jest-when";
 import {dateFromSearchString, nextDateLocation, previousDateLocation} from "./services/dateService";
@@ -29,6 +29,11 @@ jest.mock("./SeatSelectionDialog", () => {
     return () => <div>SeatSelection</div>;
 });
 
+jest.mock("./PosterDialog", () => {
+    return () => <div>Poster</div>;
+});
+
+
 describe("Basic rendering and functionality", () => {
     let testHistory;
     let testLocation;
@@ -57,12 +62,12 @@ describe("Basic rendering and functionality", () => {
                 {
                     id: 1,
                     cost: 150,
-                    movie: {name: "Movie 1"},
+                    movie: {name: "Movie 1", posterUrl:"poster.url"},
                     slot: {startTime: "start time 1"}
                 }, {
                     id: 2,
                     cost: 160,
-                    movie: {name: "Movie 2"},
+                    movie: {name: "Movie 2", posterUrl:"poster2.url"},
                     slot: {startTime: "start time 2"}
                 }
             ]
@@ -109,6 +114,18 @@ describe("Basic rendering and functionality", () => {
         fireEvent.click(getByText("Movie 1"));
 
         expect(getByText("SeatSelection")).toBeTruthy();
+    });
+
+    it("Should display poster when the selected icon is clicked", () => {
+        const {getByText, queryByText,getAllByAltText} = render(<Shows history={testHistory} location={testLocation}/>);
+
+        expect(queryByText("PosterDialog")).toBeNull();
+
+        const posters=getAllByAltText("Poster");
+
+        fireEvent.click(posters[0]);
+        
+        expect(getByText("Poster")).toBeTruthy();
     });
 
     it("Should display revenue when rendered", () => {

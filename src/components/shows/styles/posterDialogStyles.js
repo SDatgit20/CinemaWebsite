@@ -2,6 +2,9 @@ import {makeStyles} from "@material-ui/core/styles";
 
 export default makeStyles((theme) =>
     ({
+        dialogRoot: {
+            overflow: "hidden",
+        },
         dialogTitle: {
             padding: "25px",
             textAlign:"center",
@@ -25,6 +28,5 @@ export default makeStyles((theme) =>
             fontFamily:"Helvetica",
             fontWeight:"bold"
         },
-        
     })
 );
