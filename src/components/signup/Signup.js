@@ -32,10 +32,10 @@ export default () => {
     }
   };
 
-  const handleSignup = async (full_name, email, contact_number, password, confirm_password, resetForm) => {
+  const handleSignup = async (user_name,full_name, email, contact_number, password, confirm_password, resetForm) => {
 
     try {
-      await signup(full_name, email, contact_number, password, confirm_password);
+      await signup(user_name,full_name, email, contact_number, password, confirm_password);
       setShowError('');
       handleClick();
       resetForm({ values: '' })
@@ -99,7 +99,7 @@ export default () => {
       return errors;
     },
     onSubmit: () => {
-      handleSignup(formik.values.full_name, formik.values.email, formik.values.contact_number, formik.values.password, formik.values.confirm_password, formik.resetForm);
+      handleSignup(formik.values.user_name,formik.values.full_name, formik.values.email, formik.values.contact_number, formik.values.password, formik.values.confirm_password, formik.resetForm);
     },
   });
 
