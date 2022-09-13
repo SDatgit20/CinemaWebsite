@@ -5,7 +5,7 @@ export default makeStyles((theme) => ({
             color: theme.palette.primary.contrastText,
             display: 'flex',
             justifyContent: "flex-start",
-            textDecoration: 'none'
+            textDecoration: 'none',
         },
         logoutLink: {
             display: 'flex',
@@ -35,6 +35,14 @@ export default makeStyles((theme) => ({
             alignItems: "center",
             cursor: "pointer",
             color: theme.palette.primary.contrastText
+        },
+        signupIcon:{
+            color: theme.palette.primary.contrastText,
+            display: 'flex',
+            justifyContent: "flex-start",
+            textDecoration: 'none',
+            cursor: "pointer",
+            fontSize: '1.25em'
         }
     })
 );

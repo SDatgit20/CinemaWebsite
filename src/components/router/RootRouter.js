@@ -9,6 +9,7 @@ import {Login, ProtectedRoute} from "../login";
 import PropTypes from "prop-types";
 import moment from "moment";
 import Profile from "../profile/Profile";
+import Signup from "../signup/Signup";
 
 const RootRouter = ({isAuthenticated, onLogin}) => {
     const todayDate = moment().format("YYYY-MM-DD");
@@ -19,6 +20,7 @@ const RootRouter = ({isAuthenticated, onLogin}) => {
                 <Redirect path="/" exact to={`/shows?date=${todayDate}`}/>
                 <ProtectedRoute exact path="/shows" component={Shows} isAuthenticated={isAuthenticated}/>
                 <ProtectedRoute exact path="/profile" component={Profile} isAuthenticated={isAuthenticated}/>
+                <Route exact path="/signup" component={Signup} isAuthenticated={!isAuthenticated}/>
                 <Route exact path="/login"
                        component={(props) => <Login isAuthenticated={isAuthenticated} onLogin={onLogin} {...props}/>}/>
 

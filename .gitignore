@@ -2,6 +2,7 @@
 
 #ide
 .idea
+.talismanrc
 
 # dependencies
 /node_modules

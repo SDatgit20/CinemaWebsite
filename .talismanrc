@@ -4,6 +4,28 @@ fileignoreconfig:
   ignore_detectors: [filename]
 - filename: src/components/profile/ChangePasswordDialog.js
   checksum: ec166a1235c74166618b7dc72b315c020b7e6be43818f476ee2e9fdfdf567b17
+<<<<<<< HEAD
+<<<<<<< HEAD
 - filename: src/components/profile/Profile.js
   checksum: 681dfff7a578d7f4408a1bb84f214d1ea9e7f84330d0160d4622fc9c1ac2043a
+=======
+  version: ""
+fileignoreconfig:
+=======
+
+>>>>>>> 78a07b1 ([Deepa | Latha])
+- filename: yarn.lock
+  checksum: 5793285b71396c68ba465f6636ad25b2030d85858615c770a82524bfb456c611
+- filename: package-lock.json
+  checksum: cb5679ee170f14d2cba12ddc6f1b44cf76ae363f632b6f17da1a613b1983a848
+- filename: src/helpers/signupService.js
+  checksum: d37cbc1c6c7078e501eb8b3738d2af494a9059ce18c203713ee7bb1b5ef9e0bc
+- filename: src/components/signup/Signup.js
+  checksum: e52345669d610206e9a78074c5fe0cb29fff9478aba545ed867a6b256713411d
+<<<<<<< HEAD
+>>>>>>> 34aa21b ([Deepa | Latha Sree] Add. signup for new end user)
+=======
+- filename: src/components/profile/Profile.js
+  checksum: 681dfff7a578d7f4408a1bb84f214d1ea9e7f84330d0160d4622fc9c1ac2043a
+>>>>>>> 78a07b1 ([Deepa | Latha])
 version: ""
