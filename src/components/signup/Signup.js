@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import { signup } from "../../helpers/signupService";
 
 function Alert(props) {
-  return <MuiAlert elevation={100} variant="filled" {...props} />;
+  return <MuiAlert variant="filled" {...props} />;
 }
 
 export default () => {
