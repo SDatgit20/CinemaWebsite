@@ -24,10 +24,11 @@ const CustomerDetailsDialog = ({seats, selectedShow, updateShowsRevenue, open, o
 
     const formSchema = object({
         name: string("Enter name")
-            .required("Name is required"),
+            .required("Name is required")
+            .matches(/^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/, "Invalid Name"),
         phoneNumber: string("Enter phone number")
             .required("Phone number is required")
-            .matches(/^\d{10}$/, "Phone number should be 10 digits")
+            .matches(/^[6-9]\d{9}$/, "Invalid Phone Number")
     });
 
     const bookShow = async (values) => {
