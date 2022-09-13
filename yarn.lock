@@ -898,7 +898,7 @@
     "core-js-pure" "^3.0.0"
     "regenerator-runtime" "^0.13.4"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.10.2", "@babel/runtime@^7.12.13", "@babel/runtime@^7.3.1", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.2", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.4", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.6":
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.10.2", "@babel/runtime@^7.3.1", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.4", "@babel/runtime@^7.4.5", "@babel/runtime@^7.5.1", "@babel/runtime@^7.5.4", "@babel/runtime@^7.5.5", "@babel/runtime@^7.6.2", "@babel/runtime@^7.7.2", "@babel/runtime@^7.7.4", "@babel/runtime@^7.8.4", "@babel/runtime@^7.8.7", "@babel/runtime@^7.9.6":
   "integrity" "sha512-eR8Lo9hnDS7tqkO7NsV+mKvCmv5boaXFSZ70DnfhcgiEne8hv9oCEd36Klw74EtizEqLsy4YnW8UWwpBVolHZA=="
   "resolved" "https://registry.npmjs.org/@babel/runtime/-/runtime-7.19.0.tgz"
   "version" "7.19.0"
@@ -1262,55 +1262,6 @@
   "resolved" "https://registry.npmjs.org/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz"
   "version" "1.1.3"
 
-"@reach/alert-dialog@^0.17.0":
-  "integrity" "sha512-qJOp9JE2Jv8ALUhq5yJrrGITk1YCkkDFlqejI19qeAXsuQ/ZIKzeiDYSih+avb+1mfV4HEzB9WoVJWcRTOwjiQ=="
-  "resolved" "https://registry.npmjs.org/@reach/alert-dialog/-/alert-dialog-0.17.0.tgz"
-  "version" "0.17.0"
-  dependencies:
-    "@reach/auto-id" "0.17.0"
-    "@reach/dialog" "0.17.0"
-    "@reach/utils" "0.17.0"
-    "invariant" "^2.2.4"
-    "prop-types" "^15.7.2"
-    "tslib" "^2.3.0"
-
-"@reach/auto-id@0.17.0":
-  "integrity" "sha512-ud8iPwF52RVzEmkHq1twuqGuPA+moreumUHdtgvU3sr3/15BNhwp3KyDLrKKSz0LP1r3V4pSdyF9MbYM8BoSjA=="
-  "resolved" "https://registry.npmjs.org/@reach/auto-id/-/auto-id-0.17.0.tgz"
-  "version" "0.17.0"
-  dependencies:
-    "@reach/utils" "0.17.0"
-    "tslib" "^2.3.0"
-
-"@reach/dialog@0.17.0":
-  "integrity" "sha512-AnfKXugqDTGbeG3c8xDcrQDE4h9b/vnc27Sa118oQSquz52fneUeX9MeFb5ZEiBJK8T5NJpv7QUTBIKnFCAH5A=="
-  "resolved" "https://registry.npmjs.org/@reach/dialog/-/dialog-0.17.0.tgz"
-  "version" "0.17.0"
-  dependencies:
-    "@reach/portal" "0.17.0"
-    "@reach/utils" "0.17.0"
-    "prop-types" "^15.7.2"
-    "react-focus-lock" "^2.5.2"
-    "react-remove-scroll" "^2.4.3"
-    "tslib" "^2.3.0"
-
-"@reach/portal@0.17.0":
-  "integrity" "sha512-+IxsgVycOj+WOeNPL2NdgooUdHPSY285wCtj/iWID6akyr4FgGUK7sMhRM9aGFyrGpx2vzr+eggbUmAVZwOz+A=="
-  "resolved" "https://registry.npmjs.org/@reach/portal/-/portal-0.17.0.tgz"
-  "version" "0.17.0"
-  dependencies:
-    "@reach/utils" "0.17.0"
-    "tiny-warning" "^1.0.3"
-    "tslib" "^2.3.0"
-
-"@reach/utils@0.17.0":
-  "integrity" "sha512-M5y8fCBbrWeIsxedgcSw6oDlAMQDkl5uv3VnMVJ7guwpf4E48Xlh1v66z/1BgN/WYe2y8mB/ilFD2nysEfdGeA=="
-  "resolved" "https://registry.npmjs.org/@reach/utils/-/utils-0.17.0.tgz"
-  "version" "0.17.0"
-  dependencies:
-    "tiny-warning" "^1.0.3"
-    "tslib" "^2.3.0"
-
 "@svgr/babel-plugin-add-jsx-attribute@^4.2.0":
   "integrity" "sha512-j7KnilGyZzYr/jhcrSYS3FGWMZVaqyCG0vzMCwzvei0coIkczuYMcniK07nI0aHJINciujjH11T72ICW5eL5Ig=="
   "resolved" "https://registry.npmjs.org/@svgr/babel-plugin-add-jsx-attribute/-/babel-plugin-add-jsx-attribute-4.2.0.tgz"
@@ -1581,7 +1532,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^16.8.0 || ^17.0.0 || ^18.0.0", "@types/react@^16.8.6", "@types/react@^16.9.0 || ^17.0.0 || ^18.0.0":
+"@types/react@*", "@types/react@^16.8.6":
   "integrity" "sha512-Dlj2V72cfYLPNscIG3/SMUOzhzj7GK3bpSrfefwt2YT9GLynvLCCZjbhyF6VsT0q0+aRACRX03TDJGb7cA0cqg=="
   "resolved" "https://registry.npmjs.org/@types/react/-/react-16.9.25.tgz"
   "version" "16.9.25"
@@ -3756,11 +3707,6 @@
   "resolved" "https://registry.npmjs.org/detect-newline/-/detect-newline-2.1.0.tgz"
   "version" "2.1.0"
 
-"detect-node-es@^1.1.0":
-  "integrity" "sha512-ypdmJU/TbBby2Dxibuv7ZLW3Bs1QEmM7nHjEANfohJLvE0XVujisn1qPJcZxg+qDucsr+bP6fLD1rPS3AhJ7EQ=="
-  "resolved" "https://registry.npmjs.org/detect-node-es/-/detect-node-es-1.1.0.tgz"
-  "version" "1.1.0"
-
 "detect-node@^2.0.4":
   "integrity" "sha512-ZIzRpLJrOj7jjP2miAtgqIfmzbxa4ZOr5jJc601zklsfEx9oTzmmj2nVpIPRpNlRTIh8lc1kyViIY7BWSGNmKw=="
   "resolved" "https://registry.npmjs.org/detect-node/-/detect-node-2.0.4.tgz"
@@ -4828,13 +4774,6 @@
   "resolved" "https://registry.npmjs.org/fn-name/-/fn-name-3.0.0.tgz"
   "version" "3.0.0"
 
-"focus-lock@^0.11.2":
-  "integrity" "sha512-pZ2bO++NWLHhiKkgP1bEXHhR1/OjVcSvlCJ98aNJDFeb7H5OOQaO+SKOZle6041O9rv2tmbrO4JzClAvDUHf0g=="
-  "resolved" "https://registry.npmjs.org/focus-lock/-/focus-lock-0.11.2.tgz"
-  "version" "0.11.2"
-  dependencies:
-    "tslib" "^2.0.3"
-
 "follow-redirects@^1.0.0":
   "integrity" "sha512-4eyLK6s6lH32nOvLLwlIOnr9zrL8Sm+OvW4pVTJNoXeGzYIkHVf+pADQi+OJ0E67hiuSLezPVPyBcIZO50TmmQ=="
   "resolved" "https://registry.npmjs.org/follow-redirects/-/follow-redirects-1.10.0.tgz"
@@ -5030,11 +4969,6 @@
   "integrity" "sha512-DyFP3BM/3YHTQOCUL/w0OZHR0lpKeGrxotcHWcqNEdnltqFwXVfhEBQ94eIo34AfQpo0rGki4cyIiftY06h2Fg=="
   "resolved" "https://registry.npmjs.org/get-caller-file/-/get-caller-file-2.0.5.tgz"
   "version" "2.0.5"
-
-"get-nonce@^1.0.0":
-  "integrity" "sha512-FJhYRoDaiatfEkUK8HKlicmu/3SGFD51q3itKDGoSTysQJBnfOcxU5GxnhE1E6soB76MbT0MBtnKJuXyAx+96Q=="
-  "resolved" "https://registry.npmjs.org/get-nonce/-/get-nonce-1.0.1.tgz"
-  "version" "1.0.1"
 
 "get-own-enumerable-property-symbols@^3.0.0":
   "integrity" "sha512-I0UBV/XOz1XkIJHEUDMZAbzCThU/H8DxmSfmdGcKPnVhu2VfFqr34jr9777IyaTYvxjedWhqVIilEDsCdP5G6g=="
@@ -9197,13 +9131,6 @@
     "regenerator-runtime" "^0.13.3"
     "whatwg-fetch" "^3.0.0"
 
-"react-clientside-effect@^1.2.6":
-  "integrity" "sha512-XGGGRQAKY+q25Lz9a/4EPqom7WRjz3z9R2k4jhVKA/puQFH/5Nt27vFZYql4m4NVNdUvX8PS3O7r/Zzm7cjUlg=="
-  "resolved" "https://registry.npmjs.org/react-clientside-effect/-/react-clientside-effect-1.2.6.tgz"
-  "version" "1.2.6"
-  dependencies:
-    "@babel/runtime" "^7.12.13"
-
 "react-dev-utils@^10.2.1":
   "integrity" "sha512-XxTbgJnYZmxuPtY3y/UV0D8/65NKkmaia4rXzViknVnZeVlklSh8u6TnaEYPfAi/Gh1TP4mEOXHI6jQOPbeakQ=="
   "resolved" "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-10.2.1.tgz"
@@ -9234,7 +9161,7 @@
     "strip-ansi" "6.0.0"
     "text-table" "0.2.0"
 
-"react-dom@*", "react-dom@^16.0.0-0", "react-dom@^16.13.1", "react-dom@^16.8.0", "react-dom@^16.8.0 || 17.x", "react-dom@>=16.6.0":
+"react-dom@*", "react-dom@^16.0.0-0", "react-dom@^16.13.1", "react-dom@^16.8.0", "react-dom@>=16.6.0":
   "integrity" "sha512-81PIMmVLnCNLO/fFOQxdQkvEq/+Hfpv24XNJfpyZhTRfO0QcmQIF/PgCa1zCOj2w1hrn12MFLyaJ/G0+Mxtfag=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-16.13.1.tgz"
   "version" "16.13.1"
@@ -9254,41 +9181,10 @@
   "resolved" "https://registry.npmjs.org/react-fast-compare/-/react-fast-compare-2.0.4.tgz"
   "version" "2.0.4"
 
-"react-focus-lock@^2.5.2":
-  "integrity" "sha512-pSWOQrUmiKLkffPO6BpMXN7SNKXMsuOakl652IBuALAu1esk+IcpJyM+ALcYzPTTFz1rD0R54aB9A4HuP5t1Wg=="
-  "resolved" "https://registry.npmjs.org/react-focus-lock/-/react-focus-lock-2.9.1.tgz"
-  "version" "2.9.1"
-  dependencies:
-    "@babel/runtime" "^7.0.0"
-    "focus-lock" "^0.11.2"
-    "prop-types" "^15.6.2"
-    "react-clientside-effect" "^1.2.6"
-    "use-callback-ref" "^1.3.0"
-    "use-sidecar" "^1.1.2"
-
 "react-is@^16.12.0", "react-is@^16.6.0", "react-is@^16.7.0", "react-is@^16.8.0", "react-is@^16.8.1", "react-is@^16.8.4", "react-is@^16.8.6", "react-is@^16.9.0":
   "integrity" "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
   "resolved" "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz"
   "version" "16.13.1"
-
-"react-remove-scroll-bar@^2.3.3":
-  "integrity" "sha512-i9GMNWwpz8XpUpQ6QlevUtFjHGqnPG4Hxs+wlIJntu/xcsZVEpJcIV71K3ZkqNy2q3GfgvkD7y6t/Sv8ofYSbw=="
-  "resolved" "https://registry.npmjs.org/react-remove-scroll-bar/-/react-remove-scroll-bar-2.3.3.tgz"
-  "version" "2.3.3"
-  dependencies:
-    "react-style-singleton" "^2.2.1"
-    "tslib" "^2.0.0"
-
-"react-remove-scroll@^2.4.3":
-  "integrity" "sha512-ImKhrzJJsyXJfBZ4bzu8Bwpka14c/fQt0k+cyFp/PBhTfyDnU5hjOtM4AG/0AMyy8oKzOTR0lDgJIM7pYXI0kw=="
-  "resolved" "https://registry.npmjs.org/react-remove-scroll/-/react-remove-scroll-2.5.5.tgz"
-  "version" "2.5.5"
-  dependencies:
-    "react-remove-scroll-bar" "^2.3.3"
-    "react-style-singleton" "^2.2.1"
-    "tslib" "^2.1.0"
-    "use-callback-ref" "^1.3.0"
-    "use-sidecar" "^1.1.2"
 
 "react-router-dom@^5.1.2":
   "integrity" "sha512-7BPHAaIwWpZS074UKaw1FjVdZBSVWEk8IuDXdB+OkLb8vd/WRQIpA4ag9WQk61aEfQs47wHyjWUoUGGZxpQXew=="
@@ -9379,15 +9275,6 @@
   optionalDependencies:
     "fsevents" "2.1.2"
 
-"react-style-singleton@^2.2.1":
-  "integrity" "sha512-ZWj0fHEMyWkHzKYUr2Bs/4zU6XLmq9HsgBURm7g5pAVfyn49DgUiNgY2d4lXRlYSiCif9YBGpQleewkcqddc7g=="
-  "resolved" "https://registry.npmjs.org/react-style-singleton/-/react-style-singleton-2.2.1.tgz"
-  "version" "2.2.1"
-  dependencies:
-    "get-nonce" "^1.0.0"
-    "invariant" "^2.2.4"
-    "tslib" "^2.0.0"
-
 "react-test-renderer@^16.0.0-0", "react-test-renderer@>=16.9.0":
   "integrity" "sha512-Sn2VRyOK2YJJldOqoh8Tn/lWQ+ZiKhyZTPtaO0Q6yNj+QDbmRkVFap6pZPy3YQk8DScRDfyqm/KxKYP9gCMRiQ=="
   "resolved" "https://registry.npmjs.org/react-test-renderer/-/react-test-renderer-16.13.1.tgz"
@@ -9408,14 +9295,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react-use-navigate@^0.1.1":
-  "integrity" "sha512-FjSKKHmTy0DA0KBGsNlN97HVha3L3WCTRfXG2lucrgWjQGzqZZTKQ2FdCOZgE+rkBdBTAM6PLEV9MfUdm6MHlQ=="
-  "resolved" "https://registry.npmjs.org/react-use-navigate/-/react-use-navigate-0.1.1.tgz"
-  "version" "0.1.1"
-  dependencies:
-    "minimatch" "^3.0.4"
-
-"react@*", "react@^0.14 || ^15.0.0 || ^16.0.0-alpha", "react@^0.14.0 || ^15.0.0 || ^16.0.0", "react@^15.3.0 || ^16.0.0 || ^17.0.0 || ^18.0.0", "react@^16.0.0-0", "react@^16.13.1", "react@^16.8.0", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^16.8.0 || 17.x", "react@>=15", "react@>=16.3.0", "react@>=16.6.0", "react@>=16.9.0", "react@0.13.x || 0.14.x || ^15.0.0-0 || ^16.0.0-0":
+"react@*", "react@^0.14 || ^15.0.0 || ^16.0.0-alpha", "react@^0.14.0 || ^15.0.0 || ^16.0.0", "react@^16.0.0-0", "react@^16.13.1", "react@^16.8.0", "react@>=15", "react@>=16.3.0", "react@>=16.6.0", "react@>=16.9.0", "react@0.13.x || 0.14.x || ^15.0.0-0 || ^16.0.0-0":
   "integrity" "sha512-YMZQQq32xHLX0bz5Mnibv1/LHb3Sqzngu7xstSM+vrkE5Kzr9xE0yMByK5kMoTK30YVJE61WfbxIFFvfeDKT1w=="
   "resolved" "https://registry.npmjs.org/react/-/react-16.13.1.tgz"
   "version" "16.13.1"
@@ -10852,7 +10732,7 @@
   "resolved" "https://registry.npmjs.org/tiny-invariant/-/tiny-invariant-1.1.0.tgz"
   "version" "1.1.0"
 
-"tiny-warning@^1.0.0", "tiny-warning@^1.0.2", "tiny-warning@^1.0.3":
+"tiny-warning@^1.0.0", "tiny-warning@^1.0.2":
   "integrity" "sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA=="
   "resolved" "https://registry.npmjs.org/tiny-warning/-/tiny-warning-1.0.3.tgz"
   "version" "1.0.3"
@@ -10945,26 +10825,6 @@
   "integrity" "sha512-aZW88SY8kQbU7gpV19lN24LtXh/yD4ZZg6qieAJDDg+YBsJcSmLGK9QpnUjAKVG/xefmvJGd1WUmfpT/g6AJGA=="
   "resolved" "https://registry.npmjs.org/tslib/-/tslib-1.11.1.tgz"
   "version" "1.11.1"
-
-"tslib@^2.0.0":
-  "integrity" "sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ=="
-  "resolved" "https://registry.npmjs.org/tslib/-/tslib-2.4.0.tgz"
-  "version" "2.4.0"
-
-"tslib@^2.0.3":
-  "integrity" "sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ=="
-  "resolved" "https://registry.npmjs.org/tslib/-/tslib-2.4.0.tgz"
-  "version" "2.4.0"
-
-"tslib@^2.1.0":
-  "integrity" "sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ=="
-  "resolved" "https://registry.npmjs.org/tslib/-/tslib-2.4.0.tgz"
-  "version" "2.4.0"
-
-"tslib@^2.3.0":
-  "integrity" "sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ=="
-  "resolved" "https://registry.npmjs.org/tslib/-/tslib-2.4.0.tgz"
-  "version" "2.4.0"
 
 "tsutils@^3.17.1":
   "integrity" "sha512-kzeQ5B8H3w60nFY2g8cJIuH7JDpsALXySGtwGJ0p2LSjLgay3NdIpqq5SoOBe46bKDW2iq25irHCr8wjomUS2g=="
@@ -11161,21 +11021,6 @@
   dependencies:
     "punycode" "1.3.2"
     "querystring" "0.2.0"
-
-"use-callback-ref@^1.3.0":
-  "integrity" "sha512-3FT9PRuRdbB9HfXhEq35u4oZkvpJ5kuYbpqhCfmiZyReuRgpnhDlbr2ZEnnuS0RrJAPn6l23xjFg9kpDM+Ms7w=="
-  "resolved" "https://registry.npmjs.org/use-callback-ref/-/use-callback-ref-1.3.0.tgz"
-  "version" "1.3.0"
-  dependencies:
-    "tslib" "^2.0.0"
-
-"use-sidecar@^1.1.2":
-  "integrity" "sha512-epTbsLuzZ7lPClpz2TyryBfztm7m+28DlEv2ZCQ3MDr5ssiwyOwGH/e5F9CkfWjJ1t4clvI58yF822/GUkjjhw=="
-  "resolved" "https://registry.npmjs.org/use-sidecar/-/use-sidecar-1.1.2.tgz"
-  "version" "1.1.2"
-  dependencies:
-    "detect-node-es" "^1.1.0"
-    "tslib" "^2.0.0"
 
 "use@^3.1.0":
   "integrity" "sha512-cwESVXlO3url9YWlFW/TA9cshCEhtu7IKJ/p5soJ/gGpj7vbvFrAY/eIioQ6Dw23KjZhYgiIo8HOs1nQ2vr/oQ=="
