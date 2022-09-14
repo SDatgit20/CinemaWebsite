@@ -71,8 +71,8 @@ export default () => {
       if (!formik.values.user_name || (/^\s*$/.test(formik.values.user_name))) {
         errors.user_name = "Please enter username"
       }
-      else if (!(/^[A-Za-z]+[@_]+[0-9]+$/).test(formik.values.user_name)) {
-        errors.user_name = "Please enter a valid user name"
+      else if (!(/^[A-Za-z]{3,}[@_]+[0-9]+$/).test(formik.values.user_name)) {
+        errors.user_name = "Please enter a valid user name (eg: name@123)"
       }
       else if (formik.values.user_name.length < 3) {
         errors.user_name = "Minimum length of username must be 3"
