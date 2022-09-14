@@ -4,7 +4,6 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import { Button, Dialog, Typography, TextField } from "@material-ui/core";
-import { initialValues, formSchema } from "./Services/changePasswordService"
 import styles from "./changePasswordDialogStyles";
 import Alert from "@material-ui/lab/Alert/Alert";
 import Snackbar from "@material-ui/core/Snackbar/Snackbar";
@@ -12,6 +11,11 @@ import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import apiService from "../../helpers/apiService";
+import axios from "axios";
+import { urls } from "../../config/env-config";
+import { logout } from "../../helpers/authService";
+import { onChangePassword } from "./services/passwordService.js";
+
 
 export default ({ open, onClose, isAuthenticated }) => {
   const [password, setPassword] = useState({
@@ -19,14 +23,18 @@ export default ({ open, onClose, isAuthenticated }) => {
     newPassword: "",
     confirmNewPassword: ""
   })
+  const tokenKey = 'skyfox_token';
   const [isNewPasswordValid, setIsNewPasswordValid] = useState(false);
   const [isNewConfirmPasswordValid, setIsNewConfirmPasswordValid] = useState(false);
-  const [showPassword, setShowPassword] = useState(false)
-  const [passwordChangeSuccess, setPasswordChangeSuccess] = useState(false)
-
+  const [passwordChangeStatus, setPasswordChangeStatus] = useState(false)
+  const [showOldPassword, setShowOldPassword] = useState(false)
+  const [showNewPassword, setShowNewPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [showPasswordChangeStatusMsg, setShowPasswordChangeStatusMsg] = useState("");
   const classes = styles();
   const handleClose = () => {
     onClose();
+    setTimeout(() => window.location.assign("/Profile"), 2000);
   };
   const onOldChangeHandler = (event) => {
     setPassword({ ...password, oldPassword: event.target.value })
@@ -34,28 +42,53 @@ export default ({ open, onClose, isAuthenticated }) => {
   const onNewChangeHandler = (event) => {
     setPassword({ ...password, newPassword: event.target.value });
   };
-  const onNewConfirmChangeHandler = (event) => {
+  const onConfirmChangeHandler = (event) => {
     setPassword({ ...password, confirmNewPassword: event.target.value });
   };
 
-  const handleClickShowPassword = () => {
-    setShowPassword(
-      !showPassword,
+  const handleClickShowOldPassword = () => {
+    setShowOldPassword(
+      !showOldPassword,
     );
   };
-  const handleMouseDownPassword = (event) => {
+  const handleClickShowNewPassword = () => {
+    setShowNewPassword(
+      !showNewPassword,
+    );
+  };
+  const handleClickShowConfirmPassword = () => {
+    setShowConfirmPassword(
+      !showConfirmPassword,
+    );
+  }
+
+  const handleMouseDownOldPassword = (event) => {
+    event.preventDefault();
+  };
+
+
+  const handleMouseDownNewPassword = (event) => {
+    event.preventDefault();
+  };
+
+  const handleMouseDownConfirmPassword = (event) => {
     event.preventDefault();
   };
 
   const handlePassword = async (e) => {
     e.preventDefault()
-    try {
-      const response = await apiService.post("login/changePassword", password)
-      alert(response.data)
-      setPasswordChangeSuccess(true)
-    } catch (err) {
-      alert("Old Password does not matched")
 
+    try {
+      const response = await onChangePassword(password)
+      setShowPasswordChangeStatusMsg(response);
+      console.log(response);
+      logout();
+      setTimeout(() => window.location.assign("/login"), 1500);
+    } catch (err) {
+      if (err.response && err.response.status === 400) {
+        setShowPasswordChangeStatusMsg(err.response.data)
+
+      }
     }
 
   };
@@ -87,19 +120,44 @@ export default ({ open, onClose, isAuthenticated }) => {
         classes={{
           paper: classes.dialogRoot,
         }}
+        onClose={handleClose}
       >
 
         <div className={classes.container}>
           <Typography variant="h6" className={classes.dialogHeader}>
             Change Password
           </Typography>
-          <form
+          <form 
             onSubmit={handlePassword}>
             <div className={classes.dialogMain}>
+
+              <FormControl className={classes.dialogContent}>
+                <InputLabel required="true"
+                  variant="standard" htmlFor="standard-adornment-password">Old Password</InputLabel>
+                <Input
+                  id="standard-adornment-password"
+                  type={showOldPassword ? 'text' : 'password'}
+                  value={password.oldPassword}
+
+                  onChange={onOldChangeHandler}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowOldPassword}
+                        onMouseDown={handleMouseDownOldPassword}
+                      >
+                        {showOldPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+
+                />
+              </FormControl>
               <p>
                 <span
                   style={
-                    { backgroundColor: "lightpink", padding: ".3rem" }
+                    { color: "red", padding: ".rem" }
                   }
                 >
                   {((password.newPassword == password.confirmNewPassword) && password.newPassword !== "") ? " "
@@ -108,31 +166,20 @@ export default ({ open, onClose, isAuthenticated }) => {
               </p>
               <FormControl className={classes.dialogContent}>
                 <InputLabel required="true"
-                  variant="standard" htmlFor="standard-adornment-password">Old Password</InputLabel>
-                <Input
-                  id="standard-adornment-password"
-                  type='text'
-                  value={password.oldPassword}
-
-                  onChange={onOldChangeHandler}
-                />
-              </FormControl>
-              <FormControl className={classes.dialogContent}>
-                <InputLabel required="true"
                   variant="standard" htmlFor="standard-adornment-password">New Password</InputLabel>
                 <Input
                   id="standard-adornment-password"
-                  type={showPassword ? 'text' : 'password'}
+                  type={showNewPassword ? 'text' : 'password'}
                   value={password.newPassword}
                   onChange={onNewChangeHandler}
                   endAdornment={
                     <InputAdornment position="end">
                       <IconButton
                         aria-label="toggle password visibility"
-                        onClick={handleClickShowPassword}
-                        onMouseDown={handleMouseDownPassword}
+                        onClick={handleClickShowNewPassword}
+                        onMouseDown={handleMouseDownNewPassword}
                       >
-                        {showPassword ? <Visibility /> : <VisibilityOff />}
+                        {showNewPassword ? <Visibility /> : <VisibilityOff />}
                       </IconButton>
                     </InputAdornment>
                   }
@@ -142,8 +189,8 @@ export default ({ open, onClose, isAuthenticated }) => {
                 <span
                   style={
                     isNewPasswordValid
-                      ? { backgroundColor: "lightgreen", padding: ".2rem" }
-                      : { backgroundColor: "lightpink", padding: ".2rem" }
+                      ? { color: "green", padding: ".2rem" }
+                      : { color: "red", padding: ".2rem" }
                   }
                 >
                   {isNewPasswordValid ? "Valid Password" : "Password not valid"}
@@ -154,9 +201,20 @@ export default ({ open, onClose, isAuthenticated }) => {
                   variant="standard" htmlFor="standard-adornment-password">Confirm Password</InputLabel>
                 <Input
                   id="standard-adornment-password"
-                  type='password'
+                  type={showConfirmPassword ? 'text' : 'password'}
                   value={password.confirmNewPassword}
-                  onChange={onNewConfirmChangeHandler}
+                  onChange={onConfirmChangeHandler}
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        aria-label="toggle password visibility"
+                        onClick={handleClickShowConfirmPassword}
+                        onMouseDown={handleMouseDownConfirmPassword}
+                      >
+                        {showConfirmPassword ? <Visibility /> : <VisibilityOff />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
                 />
               </FormControl>
 
@@ -164,6 +222,7 @@ export default ({ open, onClose, isAuthenticated }) => {
 
             <Button
               disabled={!isNewConfirmPasswordValid}
+              onClick={(e) => { setPasswordChangeStatus(true) }}
               type="submit"
               variant="contained"
               color="primary"
@@ -181,10 +240,12 @@ export default ({ open, onClose, isAuthenticated }) => {
       </Dialog>
 
       <Snackbar
-        open={passwordChangeSuccess === true}
-        autoHideDuration={3000}
-      >
-        <Alert severity="success">Password Change successfully</Alert>
+        open={passwordChangeStatus === true}
+        autoHideDuration={500}
+      >{(showPasswordChangeStatusMsg == "Password changed successfully") ?
+        <Alert severity="success">{showPasswordChangeStatusMsg}</Alert> :
+        <Alert severity="error">{showPasswordChangeStatusMsg}</Alert>}
+
       </Snackbar>
     </>
   );
