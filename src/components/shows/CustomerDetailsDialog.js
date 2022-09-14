@@ -41,7 +41,7 @@ const CustomerDetailsDialog = ({seats, selectedShow, updateShowsRevenue, open, o
         const payload = {
             date: today,
             showId: selectedShow.id,
-            customer: {
+            audience: {
                 name: values.name,
                 phoneNumber: values.phoneNumber
             },

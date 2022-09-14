@@ -25,7 +25,7 @@ const BookingConfirmation = ({bookingConfirmation, showConfirmation,onClose}) =>
                     Show start time: {bookingConfirmation.startTime}
                 </Typography>
                 <Typography variant="body1" display="block" gutterBottom>
-                    Customer Name: {bookingConfirmation.customerName}
+                    Customer Name: {bookingConfirmation.audienceName}
                 </Typography>
                 <Typography variant="body1" display="block" gutterBottom>
                     Amount Paid: {bookingConfirmation.amountPaid}

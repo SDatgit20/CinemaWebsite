@@ -52,7 +52,7 @@ describe("Basic rendering and functionality", () => {
             format: testFormat
         });
 
-        when(bookingService.create).calledWith({name: "Name", phoneNumber: "1234567890"})
+        when(bookingService.create).calledWith({name: "Name", phoneNumber: "9123456789"})
             .mockResolvedValue("");
 
         fireEvent.change(getByTestId("name"), {
@@ -63,22 +63,22 @@ describe("Basic rendering and functionality", () => {
 
         fireEvent.change(getByTestId("phoneNumber"), {
             target: {
-                value: "1234567890"
+                value: "9123456789"
             }
         });
 
         fireEvent.click(getByTestId("bookButton"));
 
         const expectedPayload = {
-            "customer": {"name": "Name", "phoneNumber": "1234567890"},
+            "audience": {"name": "Name", "phoneNumber": "9123456789"},
             "date": "2020-06-19",
             "noOfSeats": "2",
             "showId": 1
         };
 
         await waitFor(() => {
-            // expect(bookingService.create).toHaveBeenCalledTimes(1);
-            // expect(bookingService.create).toHaveBeenCalledWith(expectedPayload);
+            expect(bookingService.create).toHaveBeenCalledTimes(1);
+            expect(bookingService.create).toHaveBeenCalledWith(expectedPayload);
         });
     });
 });
