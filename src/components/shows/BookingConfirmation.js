@@ -1,13 +1,13 @@
 import React from 'react'
-import {Dialog, DialogContent, Typography} from "@material-ui/core";
+import { Dialog, DialogContent, Typography, Button } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert/Alert";
 import styles from "./styles/customerDetailsDialogStyles"
 
-const BookingConfirmation = ({bookingConfirmation, showConfirmation,onClose}) => {
+const BookingConfirmation = ({ bookingConfirmation, showConfirmation, onClose }) => {
     const classes = styles();
 
     return (
-      <Dialog open={showConfirmation} onClose={onClose}>
+        <Dialog open={showConfirmation} onClose={onClose}>
             <Alert severity="success">
                 Seats booked successfully!
             </Alert>
@@ -33,6 +33,12 @@ const BookingConfirmation = ({bookingConfirmation, showConfirmation,onClose}) =>
                 <Typography variant="body1" display="block" gutterBottom>
                     Number of seats booked: {bookingConfirmation.noOfSeats}
                 </Typography>
+                <div className={classes.closeBookingConfirmation}>
+                    <Button type="button" color="primary" variant="contained"
+                        className={classes.bookShowButton} data-testid="bookButton" onClick={onClose}>
+                        Close
+                    </Button>
+                </div>
             </DialogContent>
         </Dialog>
     )

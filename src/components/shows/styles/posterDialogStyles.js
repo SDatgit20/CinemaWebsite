@@ -4,6 +4,7 @@ export default makeStyles((theme) =>
     ({
         dialogRoot: {
             overflow: "hidden",
+            maxWidth:"400px"
         },
         dialogTitle: {
             padding: "25px",
@@ -26,7 +27,8 @@ export default makeStyles((theme) =>
         },
         titleText:{
             fontFamily:"Helvetica",
-            fontWeight:"bold"
+            fontWeight:"bold",
+            paddingLeft:"45px"
         },
     })
 );

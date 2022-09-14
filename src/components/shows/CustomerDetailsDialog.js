@@ -1,17 +1,17 @@
-import {Button, Dialog, DialogContent, Typography} from "@material-ui/core";
-import React, {useState} from "react";
+import { Button, Dialog, DialogContent, Typography } from "@material-ui/core";
+import React, { useState } from "react";
 import styles from "./styles/customerDetailsDialogStyles"
 import bookingService from "./services/bookingService";
 import Snackbar from "@material-ui/core/Snackbar/Snackbar";
 import Alert from "@material-ui/lab/Alert/Alert";
 import PropTypes from "prop-types";
 import moment from "moment";
-import {object, string} from "yup";
-import {Form, Formik} from "formik";
+import { object, string } from "yup";
+import { Form, Formik } from "formik";
 import FormikTextField from "../formik/FormikTextField";
 import BookingConfirmation from "./BookingConfirmation";
 
-const CustomerDetailsDialog = ({seats, selectedShow, updateShowsRevenue, open, onClose}) => {
+const CustomerDetailsDialog = ({ seats, selectedShow, updateShowsRevenue, open, onClose }) => {
     const [success, setSuccess] = useState(null);
     const [showConfirmation, setShowConfirmation] = useState(false);
     const [bookingConfirmation, setBookingConfirmation] = useState({});
@@ -61,21 +61,21 @@ const CustomerDetailsDialog = ({seats, selectedShow, updateShowsRevenue, open, o
         }
     };
     return (
-      <>
+        <>
             <Dialog open={open} onClose={onClose} maxWidth={false}>
                 <Typography variant="h6" className={classes.dialogHeader}>
                     Enter Customer Details
                 </Typography>
                 <Formik validationSchema={formSchema} initialValues={initialValues} onSubmit={bookShow}>
                     {
-                        ({isValid}) => {
+                        ({ isValid }) => {
                             return (
                                 <Form>
                                     <DialogContent className={classes.dialogContent}>
                                         <FormikTextField
                                             required
                                             margin="dense"
-                                            inputProps={{"data-testid": "name"}}
+                                            inputProps={{ "data-testid": "name" }}
                                             name="name"
                                             label="Name"
                                             fullWidth
@@ -85,16 +85,18 @@ const CustomerDetailsDialog = ({seats, selectedShow, updateShowsRevenue, open, o
                                         <FormikTextField
                                             required
                                             margin="dense"
-                                            inputProps={{"data-testid": "phoneNumber"}}
+                                            inputProps={{ "data-testid": "phoneNumber" }}
                                             name="phoneNumber"
                                             label="Phone Number"
                                             fullWidth
                                             autoComplete='off'
                                         />
-                                        <Button type="submit" disabled={!isValid} color="primary" variant="contained"
+                                        <div className={classes.closeCustomerDetailDialog}>
+                                            <Button type="submit" disabled={!isValid} color="primary" variant="contained"
                                                 className={classes.bookShowButton} data-testid="bookButton">
-                                            Book
-                                        </Button>
+                                                Book
+                                            </Button>
+                                        </div>
                                     </DialogContent>
                                 </Form>
                             );
@@ -103,7 +105,7 @@ const CustomerDetailsDialog = ({seats, selectedShow, updateShowsRevenue, open, o
                 </Formik>
             </Dialog>
 
-            <BookingConfirmation bookingConfirmation={bookingConfirmation} showConfirmation={showConfirmation} onClose={handleClose}/>
+            <BookingConfirmation bookingConfirmation={bookingConfirmation} showConfirmation={showConfirmation} onClose={handleClose} />
 
             <Snackbar open={success === false} autoHideDuration={2000} onClose={() => setSuccess(null)}>
                 <Alert severity="error">

@@ -16,6 +16,13 @@ export default makeStyles((theme) =>
         },
         bookShowButton: {
             margin: "16px 0px 15px 0px"
+        },
+        closeBookingConfirmation:{
+            display:"flex",
+            justifyContent:"center"
+        },
+        closeCustomerDetailDialog:{
+            paddingLeft:"70px"
         }
     })
 );
