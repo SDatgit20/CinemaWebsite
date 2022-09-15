@@ -1,10 +1,10 @@
-import React , {useState}from 'react';
-import {Avatar, Button, Dialog, Typography, TextField, Input} from "@material-ui/core";
+import React, { useState, useEffect } from "react";
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
+import { Button, Dialog, Typography, TextField } from "@material-ui/core";
 import styles from "./changePasswordDialogStyles";
 import Alert from "@material-ui/lab/Alert/Alert";
 import Snackbar from "@material-ui/core/Snackbar/Snackbar";
@@ -13,7 +13,6 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import { logout } from "../../helpers/authService";
 import { onChangePassword } from "./services/passwordService.js";
-
 
 export default ({ open, onClose, isAuthenticated }) => {
   const [password, setPassword] = useState({
@@ -41,7 +40,8 @@ export default ({ open, onClose, isAuthenticated }) => {
   };
   const onConfirmChangeHandler = (event) => {
     setPassword({ ...password, confirmNewPassword: event.target.value });
-    
+  };
+
   const handleClickShowOldPassword = () => {
     setShowOldPassword(
       !showOldPassword,
@@ -61,7 +61,8 @@ export default ({ open, onClose, isAuthenticated }) => {
   const handleMouseDownOldPassword = (event) => {
     event.preventDefault();
   };
-    
+
+
   const handleMouseDownNewPassword = (event) => {
     event.preventDefault();
   };
@@ -109,7 +110,6 @@ export default ({ open, onClose, isAuthenticated }) => {
   }, [password.confirmNewPassword]);
   return (
     <>
-
       <Dialog
         open={open}
         fullWidth
@@ -119,6 +119,7 @@ export default ({ open, onClose, isAuthenticated }) => {
         onClose={handleClose}
       >
         <div className={classes.container}>
+
           <div className={classes.dialogHeader}>
             <div className={classes.dialogTitle}>
               <Typography variant="h6" className={classes.dialogHeaderText}>
@@ -156,7 +157,6 @@ export default ({ open, onClose, isAuthenticated }) => {
                       </IconButton>
                     </InputAdornment>
                   }
-
                 />
               </FormControl>
               <p>
@@ -222,7 +222,6 @@ export default ({ open, onClose, isAuthenticated }) => {
                   }
                 />
               </FormControl>
-
             </div>
 
             <Button
@@ -238,13 +237,13 @@ export default ({ open, onClose, isAuthenticated }) => {
           </form>
         </div>
       </Dialog>
+
       <Snackbar
         open={passwordChangeStatus === true}
         autoHideDuration={500}
       >{(showPasswordChangeStatusMsg == "Password changed successfully") ?
         <Alert severity="success">{showPasswordChangeStatusMsg}</Alert> :
-        <Alert severity="error">{showPasswordChangeStatusMsg}</Alert>}
-
+          <Alert severity="error">{showPasswordChangeStatusMsg}</Alert>}
       </Snackbar>
     </>
   );
