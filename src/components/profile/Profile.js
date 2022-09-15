@@ -10,7 +10,7 @@ export default ({ isAuthenticated }) => {
     <div>
       <h1>User Profile</h1>
       <h3>Username</h3>
-      <h5>seed-user-2</h5>
+      <h4>Seed-user-2</h4>
       <Button
         className={classes.dialogButton}
         variant="contained"

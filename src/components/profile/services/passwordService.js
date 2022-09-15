@@ -1,10 +1,7 @@
-import apiService from "../../../helpers/apiService";
 import axios from "axios";
 import { urls } from "../../../config/env-config";
 
-
 const tokenKey = 'skyfox_token';
-
 
 export const onChangePassword = async (password) => {
 
@@ -17,7 +14,6 @@ export const onChangePassword = async (password) => {
     const requestBody = { oldPassword: oldPassword, newPassword: newPassword, confirmNewPassword: confirmNewPassword }
     const response = await axios.put(`${urls.service}/login/changePassword`, requestBody, config);
 
-    const userDetails = response.data;
-    return userDetails;
+    return response;
 
 };

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import IconButton from '@material-ui/core/IconButton';
+import CloseIcon from '@material-ui/icons/Close';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
@@ -10,9 +11,6 @@ import Snackbar from "@material-ui/core/Snackbar/Snackbar";
 import FormControl from '@material-ui/core/FormControl';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
-import apiService from "../../helpers/apiService";
-import axios from "axios";
-import { urls } from "../../config/env-config";
 import { logout } from "../../helpers/authService";
 import { onChangePassword } from "./services/passwordService.js";
 
@@ -23,7 +21,6 @@ export default ({ open, onClose, isAuthenticated }) => {
     newPassword: "",
     confirmNewPassword: ""
   })
-  const tokenKey = 'skyfox_token';
   const [isNewPasswordValid, setIsNewPasswordValid] = useState(false);
   const [isNewConfirmPasswordValid, setIsNewConfirmPasswordValid] = useState(false);
   const [passwordChangeStatus, setPasswordChangeStatus] = useState(false)
@@ -66,7 +63,6 @@ export default ({ open, onClose, isAuthenticated }) => {
     event.preventDefault();
   };
 
-
   const handleMouseDownNewPassword = (event) => {
     event.preventDefault();
   };
@@ -80,8 +76,8 @@ export default ({ open, onClose, isAuthenticated }) => {
 
     try {
       const response = await onChangePassword(password)
-      setShowPasswordChangeStatusMsg(response);
-      console.log(response);
+      const passwordResponse = response.data
+      setShowPasswordChangeStatusMsg(passwordResponse);
       logout();
       setTimeout(() => window.location.assign("/login"), 1500);
     } catch (err) {
@@ -114,6 +110,7 @@ export default ({ open, onClose, isAuthenticated }) => {
   }, [password.confirmNewPassword]);
   return (
     <>
+
       <Dialog
         open={open}
         fullWidth
@@ -122,17 +119,26 @@ export default ({ open, onClose, isAuthenticated }) => {
         }}
         onClose={handleClose}
       >
-
         <div className={classes.container}>
-          <Typography variant="h6" className={classes.dialogHeader}>
+          <div className={classes.dialogHeader}>
+            <div className={classes.dialogTitle}>
+              <Typography variant="h6" className={classes.dialogHeaderText}>
             Change Password
           </Typography>
+            </div>
+            <div className={classes.closeIcon}>
+              <IconButton onClick={handleClose}>
+                <CloseIcon />
+              </IconButton>
+            </div>
+          </div>
+
           <form 
             onSubmit={handlePassword}>
             <div className={classes.dialogMain}>
 
               <FormControl className={classes.dialogContent}>
-                <InputLabel required="true"
+                <InputLabel required="true" id="pldPassword"
                   variant="standard" htmlFor="standard-adornment-password">Old Password</InputLabel>
                 <Input
                   id="standard-adornment-password"
@@ -161,7 +167,7 @@ export default ({ open, onClose, isAuthenticated }) => {
                   }
                 >
                   {((password.newPassword == password.confirmNewPassword) && password.newPassword !== "") ? " "
-                    : "Password length atleast 8 with [A..Z],[a..z],[0..9],[/,@,#,$,...*]"}
+                    : "The password must contain at least- 5 letters, 1 capital letter, 1 small letter, 1 special character( @!#$%&), and 1 number"}
                 </span>
               </p>
               <FormControl className={classes.dialogContent}>
@@ -226,19 +232,13 @@ export default ({ open, onClose, isAuthenticated }) => {
               type="submit"
               variant="contained"
               color="primary"
-              className={classes.dialogButton}
-
+              className={classes.submitButton}
             >
               Submit
             </Button>
-
           </form>
-
         </div>
-
-
       </Dialog>
-
       <Snackbar
         open={passwordChangeStatus === true}
         autoHideDuration={500}

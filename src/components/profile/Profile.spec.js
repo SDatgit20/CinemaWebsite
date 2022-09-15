@@ -6,7 +6,7 @@ import { Button } from "@material-ui/core";
 
 describe("Basic rendering", () => {
 
-    it("Shodld not render the logout section if authenticated", () => {
+    it("Should not render the logout section if authenticated", () => {
         const profileComponent = shallow(<Profile isAuthonticated={false} />);
         const changePasswordDialogComponent = profileComponent.find(<ChangePasswordDialog open={true}
             onClose={false}
