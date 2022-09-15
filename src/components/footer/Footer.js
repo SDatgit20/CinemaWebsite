@@ -10,8 +10,8 @@ const Footer = () => {
     return (
         
         <div className={classes.footer}>
-            <Typography className={classes.footerText} variant="h5">
-                <pre>Contact us now: <a href="mailto:Skyfox@gmail.com" className={classes.email}>Skyfox@gmail.com</a></pre>
+            <Typography variant="h5">
+                <pre className={classes.footerText}>Contact us now: <a href="mailto:Skyfox@gmail.com" className={classes.email}>Skyfox@gmail.com</a></pre>
             </Typography>
         </div>
     );

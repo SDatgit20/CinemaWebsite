@@ -16,6 +16,7 @@ export default makeStyles((theme) => ({
 
          footerText:{
             fontSize:"1.0rem",
+            fontFamily:" 'Roboto', 'Helvetica', 'Arial', 'sans-serif'",
          },
          email:{
             color:"white"
