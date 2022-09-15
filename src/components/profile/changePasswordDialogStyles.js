@@ -1,7 +1,9 @@
 import {makeStyles} from "@material-ui/core/styles";
 
 export default makeStyles((theme) =>
-    ({
+    ({passwordNotMatchErrorMessage:{
+        display: "flex",
+    },
         dialogRoot: {
             overflow: "hidden",
             minHeight: "30vh",
@@ -32,11 +34,30 @@ export default makeStyles((theme) =>
             display: "flex",
             alignItems: "flex-end",
             justifyContent: "space-between",
+
             padding: "20px 0px 0px 0px"
         },
         dialogButton: {
-            width:"20%",
+            width: "20%",
             margin: "5px 5px 10px 10px"
+    },
+    dialogTitle: {
+        padding: "5px",
+        textAlign: "center",
+        color: "black",
+        width: "100%"
+    },
+    dialogHeader: {
+        display: "flex",
+        justifyContent: "space-between",
+    },
+    dialogHeaderText: {
+        fontWeight: "bold",
+        padding: "10px 0px 2px 10px"
+    },
+    submitButton: {
+        width: "20%",
+        margin: "16px 0px 15px 230px"
         }
     })
 );

@@ -5,7 +5,7 @@ export default makeStyles((theme) => ({
             color: theme.palette.primary.contrastText,
             display: 'flex',
             justifyContent: "flex-start",
-            textDecoration: 'none',
+            textDecoration: 'none'
         },
         logoutLink: {
             display: 'flex',
@@ -22,7 +22,8 @@ export default makeStyles((theme) => ({
         toolbar: {
             display: 'flex',
             justifyContent: "space-between",
-            padding: "0 4em"
+            padding: "0 4em",
+            margin: "0px, 0px, 0px, 300px",
         },
         cartButton: {
             color: "white",
@@ -34,15 +35,13 @@ export default makeStyles((theme) => ({
             justifyContent: "flex-start",
             alignItems: "center",
             cursor: "pointer",
+            margin: "0px, 100px, 0px, 10px",
             color: theme.palette.primary.contrastText
-        },
-        signupIcon:{
-            color: theme.palette.primary.contrastText,
-            display: 'flex',
-            justifyContent: "flex-start",
-            textDecoration: 'none',
-            cursor: "pointer",
-            fontSize: '1.25em'
-        }
+    },
+    logoutDiv: {
+        display: 'flex',
+        justifyContent: "space-between",
+        width: "8%"
+    }
     })
 );

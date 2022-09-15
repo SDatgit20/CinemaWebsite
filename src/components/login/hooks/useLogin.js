@@ -5,7 +5,6 @@ import styles from "../styles/loginStyles"
 export default (onLogin) => {
     const classes = styles();
     const [showError, setShowError] = useState(false);
-
     const errorMessage = () => {
         if (showError) {
             return (

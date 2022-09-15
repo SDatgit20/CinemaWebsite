@@ -4,6 +4,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const ProtectedRoute = ({component: Component, isAuthenticated, ...rest}) => {
+    
 
     const renderedComponent = (props) => {
         const {location} = props;
