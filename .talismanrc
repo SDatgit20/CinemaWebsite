@@ -12,8 +12,9 @@ fileignoreconfig:
   checksum: e52345669d610206e9a78074c5fe0cb29fff9478aba545ed867a6b256713411d
 - filename: yarn.lock
   checksum: 0c036133b839cbee2fe9ea3ad7c8972a474806aa5c71b87ca9dc9e21159f137b
-version: ""
-fileignoreconfig:
 - filename: src/helpers/signupService.js
   checksum: 9f8574a17a26fb6a58d7e3224d6b9c753c2eab4d1d7b88f63547d29c9927d30e
+fileignoreconfig:
+- filename: src/components/signup/Signup.js
+  checksum: 46447a5ac0c9955eeeb4f430d3ca975cf0caf511ccd4317ab5f2b378322562f2
 version: ""
