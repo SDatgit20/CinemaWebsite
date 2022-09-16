@@ -224,7 +224,7 @@ export default ({ open, onClose, isAuthenticated }) => {
               </FormControl>
             </div>
 
-            <Button
+            <Button data-testid="submitButton"
               disabled={!isNewConfirmPasswordValid}
               onClick={(e) => { setPasswordChangeStatus(true) }}
               type="submit"
