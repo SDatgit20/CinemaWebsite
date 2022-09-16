@@ -38,6 +38,14 @@ export default makeStyles((theme) => ({
             margin: "0px, 100px, 0px, 10px",
             color: theme.palette.primary.contrastText
     },
+    signupIcon: {
+        color: theme.palette.primary.contrastText,
+        display: 'flex',
+        justifyContent: "flex-start",
+        textDecoration: 'none',
+        cursor: "pointer",
+        fontSize: '1.25em'
+    },
     logoutDiv: {
         display: 'flex',
         justifyContent: "space-between",

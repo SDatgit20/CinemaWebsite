@@ -30,7 +30,17 @@ const Header = ({onLogout, isAuthenticated}) => {
             );
         }
     };
-
+    const signupSection = () => {
+        if (!isAuthenticated) {
+            return (
+                <div>
+                    <a href="/signup" className={classes.signupIcon}>
+                        Signup
+                    </a>
+                </div>
+            );
+        }
+    };
 
     return (
         <AppBar position={"sticky"}>
@@ -41,8 +51,9 @@ const Header = ({onLogout, isAuthenticated}) => {
                         SkyFox Cinema
                     </Typography>
                 </a>
-
+                {signupSection()}
                 {logoutSection()}
+
             </Toolbar>
 
         </AppBar>

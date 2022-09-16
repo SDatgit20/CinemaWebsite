@@ -45,7 +45,7 @@ export default ({ open, onClose, isAuthenticated }) => {
   const handleClickShowOldPassword = () => {
     setShowOldPassword(
       !showOldPassword,
-    );
+    ); 
   };
   const handleClickShowNewPassword = () => {
     setShowNewPassword(
