@@ -32,15 +32,14 @@ export default () => {
     }
   };
 
-  const handleSignup = async (user_name,full_name, email, contact_number, password, confirm_password, resetForm) => {
+  const handleSignup = async (user_name, full_name, email, contact_number, password, confirm_password, resetForm) => {
 
     try {
-      await signup(user_name,full_name, email, contact_number, password, confirm_password);
+      await signup(user_name, full_name, email, contact_number, password, confirm_password);
       setShowError('');
       handleClick();
       resetForm({ values: '' })
-      setTimeout(() => { history.push("/login"); }, 1000)
-      open = true
+      setTimeout(() => { history.push("/login"); }, 900)
     } catch (err) {
       if (err.response && err.response.status === 400) {
         setShowError(err.response.data);
@@ -72,7 +71,7 @@ export default () => {
         errors.user_name = "Please enter username"
       }
       else if (!(/^[A-Za-z]{3,}[@_]+[0-9]+$/).test(formik.values.user_name)) {
-        errors.user_name = "Please enter a valid user name (eg: name@123)"
+        errors.user_name = "Please enter a valid user name"
       }
       else if (formik.values.user_name.length < 3) {
         errors.user_name = "Minimum length of username must be 3"
@@ -82,7 +81,7 @@ export default () => {
       else if (!(/^[a-zA-Z ]*$/.test(formik.values.full_name)) || formik.values.full_name.length < 3 || (/^\s*$/.test(formik.values.full_name))) {
         errors.full_name = "Please enter valid name"
       }
-      if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(formik.values.email))) {
+      if (!(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/).test(formik.values.email)) {
         errors.email = "Please enter valid email id";
       }
       if (!minLengthRegExp.test(formik.values.password) || !uppercaseRegExp.test(formik.values.password)
@@ -99,14 +98,14 @@ export default () => {
       return errors;
     },
     onSubmit: () => {
-      handleSignup(formik.values.user_name,formik.values.full_name, formik.values.email, formik.values.contact_number, formik.values.password, formik.values.confirm_password, formik.resetForm);
+      handleSignup(formik.values.user_name, formik.values.full_name, formik.values.email, formik.values.contact_number, formik.values.password, formik.values.confirm_password, formik.resetForm);
     },
   });
 
   return (
 
     <div className={classes.signupContainer}>
-      <form className={classes.signupForm} onSubmit={formik.handleSubmit}>
+      <form data-testid="form" className={classes.signupForm} onSubmit={formik.handleSubmit}>
         <h1 className={classes.title}><center>Signup</center></h1>
 
         <TextField
@@ -117,9 +116,9 @@ export default () => {
           className={classes.content}
           required="true"
           label="User Name"
-          variant="standard"
+          inputProps={{ "data-testid": "user_name" }}
         />
-        {formik.touched.user_name && formik.errors.user_name ? <div className={classes.failureText}>{formik.errors.user_name}</div> : <div>example: name@123</div>}
+        {formik.touched.user_name && formik.errors.user_name ? <div className={classes.failureText}>{formik.errors.user_name}</div> : <div>example: name@123/name_123</div>}
 
         <TextField
           name="full_name"
@@ -129,6 +128,7 @@ export default () => {
           className={classes.content}
           required="true"
           label="Full Name"
+          inputProps={{ "data-testid": "full_name" }}
           variant="standard"
         />
         {formik.touched.full_name && formik.errors.full_name ? <div className={classes.failureText}>{formik.errors.full_name}</div> : null}
@@ -141,8 +141,8 @@ export default () => {
           className={classes.content}
           required="true"
           label="Email id"
-          id ="email"
           variant="standard"
+          inputProps={{ "data-testid": "email" }}
         />
         {formik.touched.email && formik.errors.email ? <div className={classes.failureText}>{formik.errors.email}</div> : null}
 
@@ -161,6 +161,7 @@ export default () => {
           required="true"
           label="Contact Number"
           variant="standard"
+          inputProps={{ "data-testid": "contact_number" }}
         />
 
         {formik.touched.contact_number && formik.errors.contact_number ? <div className={classes.failureText}>{formik.errors.contact_number}</div> : null}
@@ -176,6 +177,7 @@ export default () => {
           required="true"
           label="Password"
           variant="standard"
+          inputProps={{ "data-testid": "password" }}
         />
 
         {formik.touched.password && formik.errors.password ? <div className={classes.failureText}>{formik.errors.password}</div> : null}
@@ -190,6 +192,7 @@ export default () => {
           className={classes.content}
           required="true"
           label="Confirm Password"
+          inputProps={{ "data-testid": "confirm_password" }}
           variant="standard"
         />
         {formik.touched.confirm_password && formik.errors.confirm_password ? <div className={classes.failureText}> {formik.errors.confirm_password}</div> : null}
@@ -198,6 +201,7 @@ export default () => {
         }</center>
         <div><Button type="submit"
           variant="contained"
+          data-testid="submit"
           color="primary"
           value="Submit"
           className={classes.button}
