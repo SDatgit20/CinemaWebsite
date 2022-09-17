@@ -1,8 +1,11 @@
 import React from "react";
+import axios from "axios";
 import "@testing-library/jest-dom/extend-expect";
-import { when } from "jest-when";
-import { render, fireEvent, act, waitFor} from "@testing-library/react";
+import { render, fireEvent, act, waitFor, } from "@testing-library/react";
 import Signup from "./Signup";
+import {when} from "jest-when";
+import { urls } from "../../config/env-config";
+import { signup } from "../../helpers/signupService";
 
 const mockHistoryPush = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -12,11 +15,11 @@ jest.mock('react-router-dom', () => ({
     }),
 }));
 
-describe('signup', () => {
+describe('baic form rendering', () => {
 
     it("rendering signUp form", async () => {
 
-        const { queryByText } = render(<Signup/>)
+        const { queryByText } = render(<Signup />)
 
         expect(queryByText("Signup")).toBeInTheDocument();
         expect(queryByText("Full Name")).toBeInTheDocument();
@@ -28,10 +31,9 @@ describe('signup', () => {
         expect(queryByText("Submit")).toBeInTheDocument();
     });
 
-
     it("should display error message when wrong input is entered in the input field", async () => {
 
-        const { getByTestId,getByText } = render(<Signup/>);
+        const { getByTestId, getByText } = render(<Signup />);
 
         fireEvent.change(getByTestId("user_name"), {
             target: {
@@ -76,49 +78,17 @@ describe('signup', () => {
     });
 
     it("should submit the form when all inputs are valid", async () => {
- 
+
         const handleSubmit = jest.fn();
-        const { getByTestId,getByText,getByRole} = render(<Signup onSubmit={handleSubmit}/>);
+        const username = "Username@123"
+        const fullName = "user"
+        const email = "apple@gmail.com"
+        const phoneNumber = "9999999998"
+        const password = "apple@123"
+        const confirmPassword = "apple@123"
 
-        fireEvent.change(getByTestId("user_name"), {
-            target: {
-                value: "user@123"
-            }
-        });
+        render(<Signup onSubmit={handleSubmit(username, fullName, email, phoneNumber, password, confirmPassword)} />);
 
-        fireEvent.change(getByTestId("full_name"), {
-            target: {
-                value: "Username"
-            }
-        });
-        fireEvent.change(getByTestId("email"), {
-            target: {
-                value: "Username@gmail.com"
-            }
-        });
-        fireEvent.change(getByTestId("contact_number"), {
-            target: {
-                value: "9898989898"
-            }
-        });
-        fireEvent.change(getByTestId("password"), {
-            target: {
-                value: "Username@123"
-            }
-        });
-        fireEvent.change(getByTestId("confirm_password"), {
-            target: {
-                value: "Username@123"
-            }
-        });
-        fireEvent.click(getByRole("button"));
-        //await waitFor(()=>expect(handleSubmit).toHaveBeenCalled());
-        act(() => {
-            fireEvent.submit(getByTestId("form"));
-        });
-        //await waitFor(()=>expect(handleSubmit).toHaveBeenCalled());
-        //await waitFor(() => expect(findByText("Signed Up Successfully!!!")).toBeInTheDocument());
-        //await waitFor(() =>  expect(handleSubmit).toHaveBeenCalled());
+        await waitFor(() => expect(handleSubmit).toBeCalledTimes(1));
     });
-
 });

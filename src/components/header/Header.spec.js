@@ -1,4 +1,3 @@
-
 import React from "react";
 import {shallow} from "enzyme";
 import Header from "./Header";
@@ -17,11 +16,18 @@ describe("Basic rendering", () => {
         const headerComponent = shallow(<Header isAuthenticated={true} onLogout={testOnLogout} />);
         const typographyComponents = headerComponent.find(Typography);
         const logoTypographyComponent = typographyComponents.at(0);
-        const logoutDivComponent = headerComponent.find("div");
         const logoutTypographyComponent = typographyComponents.at(1);
-       // expect(logoutDivComponent.prop("onClick")).toBe(testOnLogout);
         expect(logoutTypographyComponent.text()).toBe("Logout");
         expect(logoTypographyComponent.length).toBe(1);
         expect(logoTypographyComponent.text()).toBe("SkyFox Cinema");
+    });
+    it("Should render the signup section if not authenticated", () => {
+        const headerComponent = shallow(<Header isAuthenticated={false}/>);
+        const typographyComponent = headerComponent.find(Typography);
+        const missingLogoutDivComponent = headerComponent.find("div");
+        expect(missingLogoutDivComponent.length).toBe(1);
+        expect(missingLogoutDivComponent.text()).toBe("Signup");
+        expect(typographyComponent.length).toBe(1);
+        expect(typographyComponent.text()).toBe("SkyFox Cinema");
     });
 });

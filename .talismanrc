@@ -27,3 +27,9 @@ fileignoreconfig:
 - filename: src/helpers/signupService.js
   checksum: 75bf8a29080badfa2aeb3c730c75a750852ce695b2e6da305981b0fb1abdcf45
 version: ""
+fileignoreconfig:
+- filename: src/components/signup/Signup.spec.js
+  checksum: 844b589e8eeada8eb7dbbff288913a6d5dd3bdc3221d7e43c39337076d847e38
+- filename: src/helpers/signupService.spec.js
+  checksum: ca507ceec80463bb9a58aeca2aaa26434aabcc7e6c64cdb75d1134abba64fbc0
+version: ""
