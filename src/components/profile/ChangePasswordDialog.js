@@ -13,7 +13,6 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import { logout } from "../../helpers/authService";
 import { onChangePassword } from "./services/passwordService.js";
-
 export default ({ open, onClose, isAuthenticated }) => {
   const [password, setPassword] = useState({
     oldPassword: "",
@@ -41,11 +40,10 @@ export default ({ open, onClose, isAuthenticated }) => {
   const onConfirmChangeHandler = (event) => {
     setPassword({ ...password, confirmNewPassword: event.target.value });
   };
-
   const handleClickShowOldPassword = () => {
     setShowOldPassword(
       !showOldPassword,
-    ); 
+    );
   };
   const handleClickShowNewPassword = () => {
     setShowNewPassword(
@@ -57,23 +55,17 @@ export default ({ open, onClose, isAuthenticated }) => {
       !showConfirmPassword,
     );
   }
-
   const handleMouseDownOldPassword = (event) => {
     event.preventDefault();
   };
-
-
   const handleMouseDownNewPassword = (event) => {
     event.preventDefault();
   };
-
   const handleMouseDownConfirmPassword = (event) => {
     event.preventDefault();
   };
-
   const handlePassword = async (e) => {
     e.preventDefault()
-
     try {
       const response = await onChangePassword(password)
       const passwordResponse = response.data
@@ -83,14 +75,11 @@ export default ({ open, onClose, isAuthenticated }) => {
     } catch (err) {
       if (err.response && err.response.status === 400) {
         setShowPasswordChangeStatusMsg(err.response.data)
-
       }
     }
-
   };
-
   useEffect(() => {
-    if (password.newPassword.length > 8 && /\d/.test(password.newPassword)
+    if (password.newPassword.length > 8 && password.newPassword.length < 64 && /\d/.test(password.newPassword)
       && /[A-Z]/.test(password.newPassword)
       && /[0-9]/.test(password.newPassword)
       && /[ !"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]/.test(password.newPassword)) {
@@ -99,7 +88,6 @@ export default ({ open, onClose, isAuthenticated }) => {
       setIsNewPasswordValid(false);
     }
   }, [password.newPassword]);
-
   useEffect(() => {
     if (isNewPasswordValid && password.newPassword === password.confirmNewPassword) {
       setIsNewConfirmPasswordValid(true);
@@ -119,7 +107,6 @@ export default ({ open, onClose, isAuthenticated }) => {
         onClose={handleClose}
       >
         <div className={classes.container}>
-
           <div className={classes.dialogHeader}>
             <div className={classes.dialogTitle}>
               <Typography variant="h6" className={classes.dialogHeaderText}>
@@ -132,11 +119,9 @@ export default ({ open, onClose, isAuthenticated }) => {
               </IconButton>
             </div>
           </div>
-
-          <form 
+          <form
             onSubmit={handlePassword}>
             <div className={classes.dialogMain}>
-
               <FormControl className={classes.dialogContent}>
                 <InputLabel required="true" id="pldPassword"
                   variant="standard" htmlFor="standard-adornment-password">Old Password</InputLabel>
@@ -144,7 +129,6 @@ export default ({ open, onClose, isAuthenticated }) => {
                   id="standard-adornment-password"
                   type={showOldPassword ? 'text' : 'password'}
                   value={password.oldPassword}
-
                   onChange={onOldChangeHandler}
                   endAdornment={
                     <InputAdornment position="end">
@@ -159,16 +143,6 @@ export default ({ open, onClose, isAuthenticated }) => {
                   }
                 />
               </FormControl>
-              <p>
-                <span
-                  style={
-                    { color: "red", padding: ".rem" }
-                  }
-                >
-                  {((password.newPassword == password.confirmNewPassword) && password.newPassword !== "") ? " "
-                    : "The password must contain at least- 5 letters, 1 capital letter, 1 small letter, 1 special character( @!#$%&), and 1 number"}
-                </span>
-              </p>
               <FormControl className={classes.dialogContent}>
                 <InputLabel required="true"
                   variant="standard" htmlFor="standard-adornment-password">New Password</InputLabel>
@@ -190,17 +164,14 @@ export default ({ open, onClose, isAuthenticated }) => {
                   }
                 />
               </FormControl>
-              <p>
                 <span
                   style={
-                    isNewPasswordValid
-                      ? { color: "green", padding: ".2rem" }
-                      : { color: "red", padding: ".2rem" }
+                  { color: "red", padding: ".rem" }
                   }
                 >
-                  {isNewPasswordValid ? "Valid Password" : "Password not valid"}
-                </span>
-              </p>
+                {(isNewPasswordValid) ? " "
+                  : "The password must contain at least- 8 letters: 1 capital letter, 1 small letter, 1 special character( @!#$%&), and 1 number"}
+              </span>
               <FormControl className={classes.dialogContent}>
                 <InputLabel required="true"
                   variant="standard" htmlFor="standard-adornment-password">Confirm Password</InputLabel>
@@ -222,8 +193,16 @@ export default ({ open, onClose, isAuthenticated }) => {
                   }
                 />
               </FormControl>
+              <span
+                style={
+                  (password.newPassword == password.confirmNewPassword)
+                    ? { color: "green", padding: ".2rem" }
+                    : { color: "red", padding: ".2rem" }
+                }
+              >
+                {(password.confirmNewPassword === "" || (password.newPassword == password.confirmNewPassword)) ? "" : "Password mismatch"}
+              </span>
             </div>
-
             <Button data-testid="submitButton"
               disabled={!isNewConfirmPasswordValid}
               onClick={(e) => { setPasswordChangeStatus(true) }}
@@ -237,7 +216,6 @@ export default ({ open, onClose, isAuthenticated }) => {
           </form>
         </div>
       </Dialog>
-
       <Snackbar
         open={passwordChangeStatus === true}
         autoHideDuration={500}
