@@ -34,6 +34,7 @@ jest.mock("./PosterDialog", () => {
 });
 
 
+
 describe("Basic rendering and functionality", () => {
     let testHistory;
     let testLocation;
@@ -63,12 +64,12 @@ describe("Basic rendering and functionality", () => {
                     id: 1,
                     cost: 150,
                     movie: {name: "Movie 1", posterUrl:"poster.url"},
-                    slot: {startTime: "start time 1"}
+                    slot: {startTime: "9:00 AM"}
                 }, {
                     id: 2,
                     cost: 160,
                     movie: {name: "Movie 2", posterUrl:"poster2.url"},
-                    slot: {startTime: "start time 2"}
+                    slot: {startTime: "1:30 PM"}
                 }
             ]
         });
@@ -84,11 +85,11 @@ describe("Basic rendering and functionality", () => {
         shows.getByText("Shows (Show Date)");
 
         shows.getByText("Movie 1");
-        shows.getByText("start time 1");
+        shows.getByText("9:00 AM");
         shows.getByText("₹150");
 
         shows.getByText("Movie 2");
-        shows.getByText("start time 2");
+        shows.getByText("1:30 PM");
         shows.getByText("₹160");
     });
 

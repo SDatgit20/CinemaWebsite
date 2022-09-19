@@ -14,7 +14,7 @@ import styles from "./styles/showsStyles"
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import useShows from "./hooks/useShows";
-import {HEADER_DATE_FORMAT, INR_SYMBOL} from "../../Constants"
+import {HEADER_DATE_FORMAT, INR_SYMBOL, QUERY_DATE_FORMAT} from "../../Constants"
 import {dateFromSearchString, nextDateLocation, previousDateLocation} from "./services/dateService";
 import ShowsRevenue from "./ShowsRevenue";
 import useShowsRevenue from "./hooks/useShowsRevenue";
@@ -23,9 +23,8 @@ import PosterDialog from "./PosterDialog";
 
 export default ({location, history}) => {
     const classes = styles();
-
     const showsDate = dateFromSearchString(location.search);
-
+    
     const {shows, showsLoading} = useShows(showsDate);
     const {showsRevenue, updateShowsRevenue, showsRevenueLoading} = useShowsRevenue(showsDate);
     const [showSelectSeatDialog, setShowSelectSeatDialog] = useState(false);
@@ -49,6 +48,22 @@ export default ({location, history}) => {
         }
     };
     const [selectedShow, setSelectedShow] = useState(emptyShow);
+    
+    var currentDate = new Date();
+    var showDate=new Date(showsDate.format(QUERY_DATE_FORMAT));
+    // const [isNotPreviousDate, setIsNotPreviousDate] = useState(true);
+    var isNotPreviousDate
+
+    const isPastSlot =(startTime) =>{ 
+        var startTimeSplit = startTime.split(':');
+        var adminBookingWindow=30*60*1000;
+        var showHours = (startTimeSplit[1][3] === 'P') ? Number(startTimeSplit[0])+12 : Number(startTimeSplit[0]);
+        var showMinutes = Number(startTimeSplit[1][0]) * 10+Number(startTimeSplit[1][1]);
+        showDate.setHours(showHours);
+        showDate.setMinutes(showMinutes);
+        showDate=new Date(showDate.getTime()+adminBookingWindow);
+        isNotPreviousDate=!(showDate<=currentDate);
+    }
 
     return (
         <>
@@ -72,10 +87,12 @@ export default ({location, history}) => {
                                     </Avatar>
                                     
                                 </ListItemAvatar>
-                                <ListItemText className={classes.showDetails} primary={show.movie.name} onClick={() => {
+                                <ListItemText className={classes.showDetails} primary={show.movie.name} onClick={() => {  
+                                isPastSlot(show.slot.startTime);    
                                 setSelectedShow(show);
-                                setShowSelectSeatDialog(true);
-                            }} secondary={
+                                setShowSelectSeatDialog(isNotPreviousDate);
+                            }} 
+                            secondary={
                                     <>
                                         <Typography
                                             component="span"
