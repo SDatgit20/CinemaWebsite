@@ -13,6 +13,7 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import { logout } from "../../helpers/authService";
 import { onChangePassword } from "./services/passwordService.js";
+
 export default ({ open, onClose, isAuthenticated }) => {
   const [password, setPassword] = useState({
     oldPassword: "",
@@ -170,7 +171,7 @@ export default ({ open, onClose, isAuthenticated }) => {
                   }
                 >
                 {(isNewPasswordValid) ? " "
-                  : "The password must contain at least- 8 letters: 1 capital letter, 1 small letter, 1 special character( @!#$%&), and 1 number"}
+                  : "The password must contain at least- 8 characters: 1 capital letter, 1 small letter, 1 special character( @!#$%&), and 1 number"}
               </span>
               <FormControl className={classes.dialogContent}>
                 <InputLabel required="true"
@@ -223,6 +224,7 @@ export default ({ open, onClose, isAuthenticated }) => {
         <Alert severity="success">{showPasswordChangeStatusMsg}</Alert> :
           <Alert severity="error">{showPasswordChangeStatusMsg}</Alert>}
       </Snackbar>
+
     </>
   );
 }

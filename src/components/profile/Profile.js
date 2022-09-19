@@ -11,7 +11,7 @@ export default ({isAuthenticated}) => {
             <h1>User Profile</h1>
             <h3>Username</h3>
             <h5>seed-user-2</h5>
-            <Button className={classes.dialogButton} variant="contained" color="primary" onClick={() => {
+            <Button data-testid="button" className={classes.dialogButton} variant="contained" color="primary" onClick={() => {
                                 setChangePasswordDialog(true);
                             }}>CHANGE PASSWORD</Button>
             <ChangePasswordDialog open={changePasswordDialog} onClose={() => setChangePasswordDialog(false)} isAuthenticated={isAuthenticated}/>

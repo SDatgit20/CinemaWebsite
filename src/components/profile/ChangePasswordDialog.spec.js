@@ -1,9 +1,11 @@
 import React from "react";
 import { act, renderHook } from "@testing-library/react-hooks";
 import ChangePasswordDialog from "./ChangePasswordDialog";
+import Profile from "./Profile"
 import { render, shallow } from "enzyme";
 import { when } from "jest-when";
 import { Button, Dialog } from "@material-ui/core";
+import { fireEvent } from "@testing-library/react";
 
 describe("Basic rendering and functionality", () => {
     const open = true;
@@ -32,6 +34,8 @@ describe("Basic rendering and functionality", () => {
         const result = renderHookResult.result;
         expect(errorMessage).toBe("");
     });
+
+
 
     it("should not show error message if non-400 error", async () => {
         const testPasswordService = jest.fn();
