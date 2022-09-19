@@ -8,9 +8,10 @@ export default ({isAuthenticated}) => {
     const [changePasswordDialog, setChangePasswordDialog] = useState(false);
     return (
         <div>
+            <div className={classes.userName}>
             <h1>User Profile</h1>
             <h3>Username</h3>
-            <h5>seed-user-2</h5>
+            </div>
             <Button data-testid="button" className={classes.dialogButton} variant="contained" color="primary" onClick={() => {
                                 setChangePasswordDialog(true);
                             }}>CHANGE PASSWORD</Button>

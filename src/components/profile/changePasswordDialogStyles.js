@@ -55,6 +55,10 @@ export default makeStyles((theme) =>
         fontWeight: "bold",
         padding: "10px 0px 2px 10px"
     },
+    userName: {
+        padding: "5px"
+
+    },
     submitButton: {
         width: "20%",
         margin: "16px 0px 15px 230px"

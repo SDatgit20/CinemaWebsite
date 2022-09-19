@@ -40,7 +40,7 @@ export default makeStyles((theme) =>
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        maxWidth: "33%"
+        maxWidth: "30%"
     },
     seatsSelector: {
         maxWidth: "30%"

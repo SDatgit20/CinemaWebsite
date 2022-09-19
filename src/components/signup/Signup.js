@@ -54,7 +54,8 @@ export default () => {
       email: "",
       contact_number: "",
       password: "",
-      confirm_password: ""
+      confirm_password: "",
+      pramila: ""
     },
 
     validate: () => {
@@ -94,6 +95,7 @@ export default () => {
       }
       if (formik.values.confirm_password !== formik.values.password) {
         errors.confirm_password = "password did not match";
+
       }
       return errors;
     },
