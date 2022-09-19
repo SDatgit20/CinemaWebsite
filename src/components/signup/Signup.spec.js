@@ -73,7 +73,7 @@ describe('baic form rendering', () => {
 
         await waitFor(() => expect(getByText("Please enter a valid user name")).toBeInTheDocument());
         await waitFor(() => expect(getByText("Please enter valid email id")).toBeInTheDocument());
-        await waitFor(() => expect(getByText("The password must contain at least- 5 letters, 1 capital letter, 1 small letter, 1 special character( @!#$%&), and 1 number")).toBeInTheDocument());
+        await waitFor(() => expect(getByText("The password must contain at least- 8 characters: 1 capital letter, 1 small letter, 1 special character( @!#$%&), and 1 number")).toBeInTheDocument());
         await waitFor(() => expect(getByText("password did not match")).toBeInTheDocument());
     });
 
