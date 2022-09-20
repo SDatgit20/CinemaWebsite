@@ -168,10 +168,10 @@ export default ({ location, history }) => {
             color="primary"
             className={classes.navigationButton}
             style={{
-              display:
+              visibility:
                 currentDate.getDate() !== showDate.getDate()
-                  ? "inline-flex"
-                  : "none",
+                  ? "initial"
+                  : "hidden",
             }}
           >
             Previous Day
@@ -197,10 +197,10 @@ export default ({ location, history }) => {
             color="primary"
             className={classes.navigationButton}
             style={{
-              display:
+              visibility:
                 currentDate.getDate() + 2 > showDate.getDate()
-                  ? "inline-flex"
-                  : "none",
+                  ? "initial"
+                  : "hidden",
             }}
           >
             Next Day
