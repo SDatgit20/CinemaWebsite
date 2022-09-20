@@ -14,6 +14,11 @@ export default makeStyles((theme) =>
                 backgroundColor: "#f9f8fd",
             }
         },
+        showContainerForPastTime: {
+            PointerEvent:"none",
+            opacity:"0.5"
+        },
+
         localMoviesIcon: {
             "& :hover": {
                 backgroundColor: "#bdbdbd",

@@ -1,5 +1,5 @@
 import React from "react";
-import {fireEvent, getAllByAltText, render} from "@testing-library/react";
+import {fireEvent, getAllByAltText, getByText, render} from "@testing-library/react";
 import Shows from "./Shows";
 import {when} from "jest-when";
 import {dateFromSearchString, nextDateLocation, previousDateLocation} from "./services/dateService";
@@ -52,7 +52,6 @@ describe("Basic rendering and functionality", () => {
         testShowDate = {
             format: jest.fn()
         };
-
         when(dateFromSearchString).calledWith("testSearch").mockReturnValue(testShowDate);
         when(nextDateLocation).calledWith(testLocation, testShowDate).mockReturnValue("Next Location");
         when(previousDateLocation).calledWith(testLocation, testShowDate).mockReturnValue("Previous Location");
@@ -115,6 +114,7 @@ describe("Basic rendering and functionality", () => {
         fireEvent.click(getByText("Movie 1"));
 
         expect(getByText("SeatSelection")).toBeTruthy();
+
     });
 
     it("Should display poster when the selected icon is clicked", () => {
@@ -136,5 +136,27 @@ describe("Basic rendering and functionality", () => {
 
         expect(showsRevenue.prop("showsRevenue")).toBe(549.99);
         expect(showsRevenue.prop("showsRevenueLoading")).toBe(false);
+    });
+
+    it("Should not be able to view pop-up when previous day's shows is clicked", () =>{
+        const shows = render(<Shows history={testHistory} location={testLocation}/>);
+        
+        const previousDayButton = shows.getByText("Previous Day");
+        
+        fireEvent.click(previousDayButton);
+        fireEvent.click(shows.getByText("Movie 1"));
+
+        expect(shows.getByText("Movie 1")).toBeDisabled; 
+    });
+
+    it("Should be able to view pop-up when next day's shows is clicked", () =>{
+        const shows = render(<Shows history={testHistory} location={testLocation}/>);
+        
+        const nextDayButton = shows.getByText("Next Day");
+        
+        fireEvent.click(nextDayButton);
+        fireEvent.click(shows.getByText("Movie 1"));
+        
+        expect(shows.getByText("Movie 1")).not.toBeDisabled; 
     });
 });

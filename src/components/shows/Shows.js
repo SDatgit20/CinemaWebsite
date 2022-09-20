@@ -35,7 +35,7 @@ export default ({ location, history }) => {
 
   const { shows, showsLoading } = useShows(showsDate);
   const { showsRevenue, updateShowsRevenue, showsRevenueLoading } =
-    useShowsRevenue(showsDate);
+  useShowsRevenue(showsDate);
   const [showSelectSeatDialog, setShowSelectSeatDialog] = useState(false);
   const [showPosterDialog, setShowPosterDialog] = useState(false);
   const emptyShow = {
@@ -60,24 +60,6 @@ export default ({ location, history }) => {
 
   var currentDate = new Date();
   var showDate = new Date(showsDate.format(QUERY_DATE_FORMAT));
-
-  // const [isNotPreviousDate, setIsNotPreviousDate] = useState(true);
-  var isNotPreviousDate;
-
-  const isPastSlot = (startTime) => {
-    var startTimeSplit = startTime.split(":");
-    var adminBookingWindow = 30 * 60 * 1000;
-    var showHours =
-      startTimeSplit[1][3] === "P"
-        ? Number(startTimeSplit[0]) + 12
-        : Number(startTimeSplit[0]);
-    var showMinutes =
-      Number(startTimeSplit[1][0]) * 10 + Number(startTimeSplit[1][1]);
-    showDate.setHours(showHours);
-    showDate.setMinutes(showMinutes);
-    showDate = new Date(showDate.getTime() + adminBookingWindow);
-    isNotPreviousDate = !(showDate <= currentDate);
-  };
 
   return (
     <>
@@ -115,12 +97,14 @@ export default ({ location, history }) => {
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
-                className={classes.showDetails}
+                className={isNotPreviousSlot(show.slot.startTime, currentDate, showDate) ? classes.showContainer : classes.showContainerForPastTime}
                 primary={show.movie.name}
                 onClick={() => {
-                  isPastSlot(show.slot.startTime);
                   setSelectedShow(show);
-                  setShowSelectSeatDialog(isNotPreviousDate);
+                  {
+                    window.localStorage.getItem("rolename") === "customer" ? setShowSelectSeatDialog(true) :
+                    setShowSelectSeatDialog(isNotPreviousSlot(show.slot.startTime, currentDate, showDate));
+                  }
                 }}
                 secondary={
                   <>
@@ -224,3 +208,14 @@ export default ({ location, history }) => {
     </>
   );
 };
+
+function isNotPreviousSlot(startTime, currentDate, showDate){
+    var startTimeSplit = startTime.split(':');
+    var adminBookingWindow=30*60*1000;
+    var showHours = (startTimeSplit[1][3] === 'P') ? Number(startTimeSplit[0])+12 : Number(startTimeSplit[0]);
+    var showMinutes = Number(startTimeSplit[1][0]) * 10+Number(startTimeSplit[1][1]);
+    showDate.setHours(showHours);
+    showDate.setMinutes(showMinutes);
+    showDate=new Date(showDate.getTime()+adminBookingWindow);
+    return !(showDate<=currentDate);
+}
