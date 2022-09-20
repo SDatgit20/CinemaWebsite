@@ -18,7 +18,7 @@ describe("Basic rendering", () => {
         const footerPreComponent = headerComponent.find("pre");
 
         expect(footerPreComponent.length).toBe(1);
-        expect(footerPreComponent.text()).toBe("Contact us now: Skyfox@gmail.com");
+        expect(footerPreComponent.text()).toBe("Contact us now: helpdesk@skyfox.com");
     });
 
 });

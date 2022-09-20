@@ -32,4 +32,7 @@ fileignoreconfig:
   checksum: 844b589e8eeada8eb7dbbff288913a6d5dd3bdc3221d7e43c39337076d847e38
 - filename: src/helpers/signupService.spec.js
   checksum: ca507ceec80463bb9a58aeca2aaa26434aabcc7e6c64cdb75d1134abba64fbc0
+- filename: src/components/shows/Shows.js
+  checksum: 386be66b2b26c08173878c67debe300eb0aec29ac543fac02198d7d769bb1bff
 version: ""
+

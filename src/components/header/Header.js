@@ -5,7 +5,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import Person from '@material-ui/icons/Person';
 import styles from "./styles/headerStyles";
 import PropTypes from "prop-types";
-
+import fetchAll from "../shows/services/showsService"
 const Header = ({onLogout, isAuthenticated}) => {
     const classes = styles();
 

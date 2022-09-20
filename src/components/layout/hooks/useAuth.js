@@ -10,6 +10,7 @@ export default () => {
     const handleLogin = async (username, password) => {
         const userDetails = await login(username, password);
         setIsAuthenticated(true);
+        window.localStorage.setItem("rolename", userDetails.roleName); 
         return userDetails;
     };
 
