@@ -7,7 +7,9 @@ const BookingConfirmation = ({ bookingConfirmation, showConfirmation, onClose })
     const classes = styles();
 
     return (
-        <Dialog open={showConfirmation} onClose={onClose}>
+        <Dialog open={showConfirmation} onClose={onClose} fullWidth classes={{
+            paper: classes.dialogRoot
+        }}>
             <Alert severity="success">
                 Seats booked successfully!
             </Alert>
