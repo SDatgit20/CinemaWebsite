@@ -97,7 +97,8 @@ export default ({ location, history }) => {
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
-                className={isNotPreviousSlot(show.slot.startTime, currentDate, showDate) ? classes.showContainer : classes.showContainerForPastTime}
+                className= 
+                {window.localStorage.getItem("rolename") === "customer" || isNotPreviousSlot(show.slot.startTime, currentDate, showDate) ? classes.showContainer : classes.showContainerForPastTime}
                 primary={show.movie.name}
                 onClick={() => {
                   setSelectedShow(show);
