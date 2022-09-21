@@ -28,11 +28,9 @@ import ShowsRevenue from "./ShowsRevenue";
 import useShowsRevenue from "./hooks/useShowsRevenue";
 import SeatSelectionDialog from "./SeatSelectionDialog";
 import PosterDialog from "./PosterDialog";
-
 export default ({ location, history }) => {
   const classes = styles();
   const showsDate = dateFromSearchString(location.search);
-
   const { shows, showsLoading } = useShows(showsDate);
   const { showsRevenue, updateShowsRevenue, showsRevenueLoading } =
   useShowsRevenue(showsDate);
@@ -56,17 +54,26 @@ export default ({ location, history }) => {
       endTime: "",
     },
   };
-  const [selectedShow, setSelectedShow] = useState(emptyShow);
 
+  const scheduleMovie = () =>{
+    return (
+        <div>
+            <a href="/schedule" className={classes.scheduleMovieIcon}>
+            <Button >Schedule Movie</Button> 
+            </a>
+        </div>
+    );
+}
+  const [selectedShow, setSelectedShow] = useState(emptyShow);
   var currentDate = new Date();
   var showDate = new Date(showsDate.format(QUERY_DATE_FORMAT));
-
   return (
     <>
       <div className={classes.cardHeader}>
         <Typography variant="h4" className={classes.showsHeader}>
           Shows ({showsDate.format(HEADER_DATE_FORMAT)})
         </Typography>
+        {scheduleMovie()}
         {window.localStorage.getItem("rolename") === "customer" ? (
           <></>
         ) : (
@@ -97,7 +104,7 @@ export default ({ location, history }) => {
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
-                className= 
+                className=
                 {window.localStorage.getItem("rolename") === "customer" || isNotPreviousSlot(show.slot.startTime, currentDate, showDate) ? classes.showContainer : classes.showContainerForPastTime}
                 primary={show.movie.name}
                 onClick={() => {
@@ -129,23 +136,21 @@ export default ({ location, history }) => {
           </div>
         ))}
       </List>
-
       <SeatSelectionDialog
         selectedShow={selectedShow}
         updateShowsRevenue={updateShowsRevenue}
         open={showSelectSeatDialog}
         onClose={() => setShowSelectSeatDialog(false)}
       />
-
       <PosterDialog
         selectedShow={selectedShow}
         open={showPosterDialog}
         onClose={() => setShowPosterDialog(false)}
       />
-
       <div className={classes.buttons}>
         {window.localStorage.getItem("rolename") === "customer" ? (
           <Button
+            data-testid = "customerPreviousButton"
             onClick={() => {
               history.push(previousDateLocation(location, showsDate));
             }}
@@ -163,6 +168,7 @@ export default ({ location, history }) => {
           </Button>
         ) : (
           <Button
+            data-testid = "adminPreviousButton"
             onClick={() => {
               history.push(previousDateLocation(location, showsDate));
             }}
@@ -209,7 +215,6 @@ export default ({ location, history }) => {
     </>
   );
 };
-
 function isNotPreviousSlot(startTime, currentDate, showDate){
     var startTimeSplit = startTime.split(':');
     var adminBookingWindow=30*60*1000;
@@ -220,3 +225,6 @@ function isNotPreviousSlot(startTime, currentDate, showDate){
     showDate=new Date(showDate.getTime()+adminBookingWindow);
     return !(showDate<=currentDate);
 }
+
+
+

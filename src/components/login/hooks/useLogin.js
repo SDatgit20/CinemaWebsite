@@ -9,7 +9,7 @@ export default (onLogin) => {
         if (showError) {
             return (
                 <Typography variant="body1" color="error" className={classes.loginErrorMessage}>
-                    Login failed
+                    Login failed 
                 </Typography>
             )
         }

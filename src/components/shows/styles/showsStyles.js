@@ -60,6 +60,15 @@ export default makeStyles((theme) =>
             backgroundColor: theme.palette.background.paper,
             boxShadow: theme.shadows[5],
             padding: theme.spacing(2, 4, 3),
+        },
+        scheduleMovieIcon:{
+            color: theme.palette.primary.contrastText,
+            display: 'flex',
+            textDecoration: 'none',
+            alignItems:"center",
+            cursor: "pointer",
+            fontSize: '1.25em',
+            padding: ''
         }
     })
 );

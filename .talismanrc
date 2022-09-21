@@ -35,4 +35,9 @@ fileignoreconfig:
 - filename: src/components/shows/Shows.js
   checksum: 386be66b2b26c08173878c67debe300eb0aec29ac543fac02198d7d769bb1bff
 version: ""
-
+fileignoreconfig:
+- filename: src/components/scheduleMovie/ScheduleMovieService.js
+  checksum: 574d94f91b825a2b17d1c5f7dc9b6018dc9810c1e65dc30a7ea59bdb7492486d
+- filename: src/components/scheduleMovie/ScheduleMovie.js
+  checksum: dd48fc6300621874bbe7766f7482b96e90abac9d368106c6c267351ddfb4f944
+version: ""
