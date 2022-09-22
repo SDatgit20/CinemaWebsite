@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Avatar,
   Backdrop,
@@ -36,6 +36,17 @@ export default ({ location, history }) => {
   useShowsRevenue(showsDate);
   const [showSelectSeatDialog, setShowSelectSeatDialog] = useState(false);
   const [showPosterDialog, setShowPosterDialog] = useState(false);
+
+  var currentDate = new Date();
+  var showDate = new Date(showsDate.format(QUERY_DATE_FORMAT));
+
+  useEffect(() => {
+   if((window.localStorage.getItem("rolename") === "customer") && (isPreviousDayShow(currentDate,showDate) || isAfterTwoDaysShow(currentDate,showDate))){
+    history.push("/")
+   } 
+   
+  },[showDate.getDate(),showDate.getMonth(),showDate.getFullYear()]);
+
   const emptyShow = {
     id: "",
     date: "",
@@ -66,8 +77,7 @@ export default ({ location, history }) => {
     );
 }
   const [selectedShow, setSelectedShow] = useState(emptyShow);
-  var currentDate = new Date();
-  var showDate = new Date(showsDate.format(QUERY_DATE_FORMAT));
+  
   return (
     <>
       <div className={classes.cardHeader}>
@@ -216,6 +226,8 @@ export default ({ location, history }) => {
     </>
   );
 };
+
+
 function isNotPreviousSlot(startTime, currentDate, showDate){
     var startTimeSplit = startTime.split(':');
     var adminBookingWindow=30*60*1000;
@@ -225,6 +237,22 @@ function isNotPreviousSlot(startTime, currentDate, showDate){
     showDate.setMinutes(showMinutes);
     showDate=new Date(showDate.getTime()+adminBookingWindow);
     return !(showDate<=currentDate);
+}
+
+function isPreviousDayShow(currentDate, showDate){
+  if((showDate.getYear() < currentDate.getYear()) || (showDate.getMonth() < currentDate.getMonth()) || (showDate.getDate() < currentDate.getDate()))
+  {
+    return true;
+  }
+}
+
+function isAfterTwoDaysShow(currentDate, showDate){
+ var twoDayWindow = new Date();
+ twoDayWindow.setDate(currentDate.getDate()+2);
+ if((showDate.getYear() > twoDayWindow.getYear()) || (showDate.getMonth() > twoDayWindow.getMonth()) || (showDate.getDate()> twoDayWindow.getDate()))
+ {
+   return true;
+ }
 }
 
 
