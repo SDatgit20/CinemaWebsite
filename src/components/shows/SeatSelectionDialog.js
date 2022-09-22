@@ -68,7 +68,7 @@ const SeatSelectionDialog = ({selectedShow, updateShowsRevenue, open, onClose}) 
                                 <div className={classes.seatsAndAmount}>
                                     <div className={classes.seatsSelector}>
                                         <TextField type="number" label="Seats" defaultValue="1"
-                                                   inputProps={{step: "1", min: "1", max: "15"}}
+                                                   inputProps={{step: "1", min: "1", max: "20"}}
                                             onChange={(e) => setSeats(e.target.value)} />
                                     </div>
 

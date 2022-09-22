@@ -56,4 +56,26 @@ describe("Basic rendering and functionality", () => {
 
         expect(getByText("Customer Details is open")).toBeTruthy();
     });
+
+    it("Should disable next button when seat number is greater than 20", () => {
+        const { queryByText, getByText, getByDisplayValue } = render(<SeatSelectionDialog selectedShow={selectedShow} open={openDialog}
+            onClose={onClose}
+            updateShowsRevenue={updateShowRevenue} />);
+
+        fireEvent.change(getByDisplayValue("1"), { target: { value: '21' } });
+        expect(queryByText("Seat number must be less then 20")).toBeTruthy;
+        expect(getByText("Next")).toBeDisabled;
+
+    });
+
+    it("Should disable next button when seat number is negative", () => {
+        const { queryByText, getByText, getByDisplayValue } = render(<SeatSelectionDialog selectedShow={selectedShow} open={openDialog}
+            onClose={onClose}
+            updateShowsRevenue={updateShowRevenue} />);
+
+        fireEvent.change(getByDisplayValue("1"), { target: { value: '-1' } });
+        expect(queryByText("Book atleast 1 seat")).toBeTruthy;
+        expect(getByText("Next")).toBeDisabled;
+
+    })
 });

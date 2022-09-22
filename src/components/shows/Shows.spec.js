@@ -159,4 +159,5 @@ describe("Basic rendering and functionality", () => {
         
         expect(shows.getByText("Movie 1")).not.toBeDisabled; 
     });
+    
 });
