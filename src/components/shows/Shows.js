@@ -53,6 +53,7 @@ export default ({ location, history }) => {
       startTime: "",
       endTime: "",
     },
+    "bookedSeats": ""
   };
 
   const scheduleMovie = () =>{
