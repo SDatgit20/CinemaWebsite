@@ -39,7 +39,7 @@ export default ({ location, history }) => {
 
   var currentDate = new Date();
   var showDate = new Date(showsDate.format(QUERY_DATE_FORMAT));
-
+  console.log(currentDate);
   useEffect(() => {
    if((window.localStorage.getItem("rolename") === "customer") && (isPreviousDayShow(currentDate,showDate) || isAfterTwoDaysShow(currentDate,showDate))){
     history.push("/")
@@ -69,7 +69,7 @@ export default ({ location, history }) => {
 
   const scheduleMovie = () =>{
     return (
-        <div>
+        <div data-testid="scheduleMovieDiv">
             <a href="/schedule" className={classes.scheduleMovieIcon}>
             <Button >Schedule Movie</Button> 
             </a>
@@ -84,7 +84,11 @@ export default ({ location, history }) => {
         <Typography variant="h4" className={classes.showsHeader}>
           Shows ({showsDate.format(HEADER_DATE_FORMAT)})
         </Typography>
-        {scheduleMovie()}
+        {window.localStorage.getItem("rolename") === "customer" ? (
+          <></>
+        ) : (
+          scheduleMovie()
+        )}
         {window.localStorage.getItem("rolename") === "customer" ? (
           <></>
         ) : (
@@ -192,6 +196,7 @@ export default ({ location, history }) => {
         )}
         {window.localStorage.getItem("rolename") === "customer" ? (
           <Button
+            data-testid = "customerNextButton"
             onClick={() => {
               history.push(nextDateLocation(location, showsDate));
             }}
@@ -209,6 +214,7 @@ export default ({ location, history }) => {
           </Button>
         ) : (
           <Button
+            data-testid = "adminNextButton"
             onClick={() => {
               history.push(nextDateLocation(location, showsDate));
             }}
@@ -228,7 +234,7 @@ export default ({ location, history }) => {
 };
 
 
-function isNotPreviousSlot(startTime, currentDate, showDate){
+export function isNotPreviousSlot(startTime, currentDate, showDate){
     var startTimeSplit = startTime.split(':');
     var adminBookingWindow=30*60*1000;
     var showHours = (startTimeSplit[1][3] === 'P') ? Number(startTimeSplit[0])+12 : Number(startTimeSplit[0]);
@@ -239,21 +245,24 @@ function isNotPreviousSlot(startTime, currentDate, showDate){
     return !(showDate<=currentDate);
 }
 
-function isPreviousDayShow(currentDate, showDate){
+export function isPreviousDayShow(currentDate, showDate){
   if((showDate.getYear() < currentDate.getYear()) || (showDate.getMonth() < currentDate.getMonth()) || (showDate.getDate() < currentDate.getDate()))
   {
     return true;
   }
+  return false;
 }
 
-function isAfterTwoDaysShow(currentDate, showDate){
+export function isAfterTwoDaysShow(currentDate, showDate){
  var twoDayWindow = new Date();
  twoDayWindow.setDate(currentDate.getDate()+2);
  if((showDate.getYear() > twoDayWindow.getYear()) || (showDate.getMonth() > twoDayWindow.getMonth()) || (showDate.getDate()> twoDayWindow.getDate()))
  {
    return true;
  }
+ return false;
 }
+
 
 
 
