@@ -124,25 +124,15 @@ export default ({ location, history }) => {
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
-                className={
-                  window.localStorage.getItem("rolename") === "customer" ||
-                  isNotPreviousSlot(show.slot.startTime, currentDate, showDate)
-                    ? classes.showContainer
-                    : classes.showContainerForPastTime
-                }
+                className={(window.localStorage.getItem("rolename") === "customer") ? 
+                (isNotPreviousSlotCustomer(show.slot.startTime, currentDate, showDate) ? classes.showContainer : classes.showContainerForPastTime) :
+                (isNotPreviousSlotAdmin(show.slot.startTime, currentDate, showDate) ? classes.showContainer : classes.showContainerForPastTime)}
                 primary={show.movie.name}
                 onClick={() => {
                   setSelectedShow(show);
                   {
-                    window.localStorage.getItem("rolename") === "customer"
-                      ? setShowSelectSeatDialog(true)
-                      : setShowSelectSeatDialog(
-                          isNotPreviousSlot(
-                            show.slot.startTime,
-                            currentDate,
-                            showDate
-                          )
-                        );
+                    window.localStorage.getItem("rolename") === "customer" ? setShowSelectSeatDialog(isNotPreviousSlotCustomer(show.slot.startTime, currentDate, showDate)) :
+                    setShowSelectSeatDialog(isNotPreviousSlotAdmin(show.slot.startTime, currentDate, showDate));
                   }
                 }}
                 secondary={
@@ -249,7 +239,7 @@ export default ({ location, history }) => {
   );
 };
 
-export function isNotPreviousSlot(startTime, currentDate, showDate) {
+export function isNotPreviousSlotAdmin(startTime, currentDate, showDate) {
   var startTimeSplit = startTime.split(":");
   var adminBookingWindow = 30 * 60 * 1000;
   var showHours =
@@ -263,6 +253,16 @@ export function isNotPreviousSlot(startTime, currentDate, showDate) {
   showDate = new Date(showDate.getTime() + adminBookingWindow);
   return !(showDate <= currentDate);
 }
+
+export function isNotPreviousSlotCustomer(startTime, currentDate, showDate){
+    var startTimeSplit = startTime.split(':');
+    var showHours = (startTimeSplit[1][3] === 'P') ? Number(startTimeSplit[0])+12 : Number(startTimeSplit[0]);
+    var showMinutes = Number(startTimeSplit[1][0]) * 10+Number(startTimeSplit[1][1]);
+    showDate.setHours(showHours);
+    showDate.setMinutes(showMinutes);
+    showDate=new Date(showDate.getTime());
+    return !(showDate<=currentDate);
+  }
 
 export function isPreviousDayShow(currentDate, showDate) {
   if (

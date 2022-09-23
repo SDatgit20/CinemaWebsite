@@ -17,7 +17,7 @@ import SeatSelectionDialog from "./SeatSelectionDialog";
 import useShowsRevenue from "./hooks/useShowsRevenue";
 import { shallow } from "enzyme";
 import ShowsRevenue from "./ShowsRevenue";
-import {isAfterTwoDaysShow, isPreviousDayShow, isNotPreviousSlot} from "./Shows"
+import {isAfterTwoDaysShow, isPreviousDayShow, isNotPreviousSlotAdmin, isNotPreviousSlotCustomer} from "./Shows"
 
 jest.mock("./services/dateService", () => ({
   dateFromSearchString: jest.fn(),
@@ -196,7 +196,7 @@ describe("Basic rendering and functionality", () => {
     showDate.setDate(currentDate.getDate()-1);
     var startTime = "9:00 AM";
 
-    expect(isNotPreviousSlot(startTime,currentDate,showDate)).toEqual(false);
+    expect(isNotPreviousSlotAdmin(startTime,currentDate,showDate)).toEqual(false);
 });
 
 it("should return true when show slot is not past on current day for admin", () =>{
@@ -205,7 +205,7 @@ it("should return true when show slot is not past on current day for admin", () 
     showDate.setDate(currentDate.getDate());
     var startTime = "9:00 AM";
 
-    expect(isNotPreviousSlot(startTime,currentDate,showDate)).toEqual(true);
+    expect(isNotPreviousSlotAdmin(startTime,currentDate,showDate)).toEqual(true);
 });
 
 it("should return true when show slot is on future day for admin", () =>{
@@ -214,7 +214,7 @@ it("should return true when show slot is on future day for admin", () =>{
     showDate.setDate(currentDate.getDate()+1);
     var startTime = "9:00 AM";
 
-    expect(isNotPreviousSlot(startTime,currentDate,showDate)).toEqual(true);
+    expect(isNotPreviousSlotAdmin(startTime,currentDate,showDate)).toEqual(true);
 });
 
 it("should return true when previous day is called in url for customer", () =>{
@@ -269,8 +269,26 @@ it("should return false when after past day is called in url for customer", () =
     const currentDate=new Date("Thu Sep 22 2022 8:30:00 GMT+0530 (India Standard Time)");
     var showDate = new Date();
     showDate.setDate(currentDate.getDate()-1);
-    
+
     expect(isAfterTwoDaysShow(currentDate,showDate)).toEqual(false);
+});
+
+it("should return true when show slot is not past on current day for customer", () =>{
+    const currentDate=new Date("Thu Sep 22 2022 8:30:00 GMT+0530 (India Standard Time)");
+    var showDate = new Date();
+    showDate.setDate(currentDate.getDate());
+    var startTime = "9:00 AM";
+
+    expect(isNotPreviousSlotCustomer(startTime,currentDate,showDate)).toEqual(true);
+});
+
+it("should return false when show slot is past on current day for customer", () =>{
+    const currentDate=new Date("Thu Sep 22 2022 9:20:00 GMT+0530 (India Standard Time)");
+    var showDate = new Date();
+    showDate.setDate(currentDate.getDate());
+    var startTime = "9:00 AM";
+
+    expect(isNotPreviousSlotCustomer(startTime,currentDate,showDate)).toEqual(false);
 });
   
 });
