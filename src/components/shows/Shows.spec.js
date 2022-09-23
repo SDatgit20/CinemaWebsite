@@ -1,5 +1,5 @@
 import React from "react";
-import {fireEvent, getAllByAltText, getByText, queryByTestId, render} from "@testing-library/react";
+import {fireEvent, getAllByAltText, getByText, render} from "@testing-library/react";
 import Shows from "./Shows";
 import {when} from "jest-when";
 import {dateFromSearchString, nextDateLocation, previousDateLocation} from "./services/dateService";
@@ -8,7 +8,6 @@ import SeatSelectionDialog from "./SeatSelectionDialog";
 import useShowsRevenue from "./hooks/useShowsRevenue";
 import {shallow} from "enzyme";
 import ShowsRevenue from "./ShowsRevenue";
-import {isNotPreviousSlot,isPreviousDayShow,isAfterTwoDaysShow } from './Shows';
 
 jest.mock("./services/dateService", () => ({
     dateFromSearchString: jest.fn(),
@@ -130,193 +129,35 @@ describe("Basic rendering and functionality", () => {
         expect(getByText("Poster")).toBeTruthy();
     });
 
-    it("Should display revenue when rendered for admin", () => {
-        jest.spyOn(Storage.prototype, 'getItem');
-        Storage.prototype.getItem = jest.fn(() => "admin");
-
+    it("Should display revenue when rendered", () => {
         const shows = shallow(<Shows history={testHistory} location={testLocation}/>);
 
         const showsRevenue = shows.find(ShowsRevenue);
-        
-        expect(localStorage.getItem).toHaveBeenCalled();
+
         expect(showsRevenue.prop("showsRevenue")).toBe(549.99);
         expect(showsRevenue.prop("showsRevenueLoading")).toBe(false);
     });
 
-    it("Should not display revenue when rendered for customer", () => {
-        jest.spyOn(Storage.prototype, 'getItem');
-        Storage.prototype.getItem = jest.fn(() => "customer");
-
-        const shows = shallow(<Shows history={testHistory} location={testLocation}/>);
-
-        expect(shows.contains(<ShowsRevenue/>)).toBe(false);
-        expect(localStorage.getItem).toHaveBeenCalled();
-    });
-
-    it("Should display previous day button when rendered for admin on current date", () => {
-        jest.spyOn(Storage.prototype, 'getItem');
-        Storage.prototype.getItem = jest.fn(() => "admin");
-
+    it("Should not be able to view pop-up when previous day's shows is clicked", () =>{
         const shows = render(<Shows history={testHistory} location={testLocation}/>);
-
-        expect(localStorage.getItem).toHaveBeenCalled();
-        expect(shows.queryByTestId("adminPreviousButton")).toBeDefined();
-    });
-
-    it("Should not display previous day button when rendered for customer on current date", () => {
-        jest.spyOn(Storage.prototype, 'getItem');
-        Storage.prototype.getItem = jest.fn(() => "customer");
-
-        const shows = render(<Shows history={testHistory} location={testLocation}/>);
-
-        expect(localStorage.getItem).toHaveBeenCalled();
-        expect(shows.queryByTestId("customerPreviousButton")).toBeDefined();
-    });
-
-    it("Should display next day button when rendered for admin after two day window", () => {
-        jest.spyOn(Storage.prototype, 'getItem');
-        Storage.prototype.getItem = jest.fn(() => "admin");
-
-        const shows = render(<Shows history={testHistory} location={testLocation}/>);
-
-        expect(localStorage.getItem).toHaveBeenCalled();
-        expect(shows.queryByTestId("adminNextButton")).toBeDefined();
-    });
-
-    it("Should not display next day button when rendered for customer after two day window", () => {
-        jest.spyOn(Storage.prototype, 'getItem');
-        Storage.prototype.getItem = jest.fn(() => "customer");
-
-        const shows = render(<Shows history={testHistory} location={testLocation}/>);
-
-        expect(localStorage.getItem).toHaveBeenCalled();
-        expect(shows.queryByTestId("customerNextButton")).toBeDefined();
-    });
-
-    it("Should not be able to view pop-up when previous day's shows is clicked for admin", () =>{
-        jest.spyOn(Storage.prototype, 'getItem');
-        Storage.prototype.getItem = jest.fn(() => "admin");
-        const shows = render(<Shows history={testHistory} location={testLocation}/>);
+        
         const previousDayButton = shows.getByText("Previous Day");
         
         fireEvent.click(previousDayButton);
         fireEvent.click(shows.getByText("Movie 1"));
 
-        expect(localStorage.getItem).toHaveBeenCalled();
         expect(shows.getByText("Movie 1")).toBeDisabled; 
     });
 
-    it("Should be able to view pop-up when next day's shows is clicked for admin", () =>{
-        jest.spyOn(Storage.prototype, 'getItem');
-        Storage.prototype.getItem = jest.fn(() => "admin");
+    it("Should be able to view pop-up when next day's shows is clicked", () =>{
         const shows = render(<Shows history={testHistory} location={testLocation}/>);
+        
         const nextDayButton = shows.getByText("Next Day");
         
         fireEvent.click(nextDayButton);
         fireEvent.click(shows.getByText("Movie 1"));
         
-        expect(localStorage.getItem).toHaveBeenCalled();
         expect(shows.getByText("Movie 1")).not.toBeDisabled; 
     });
-
-    it("should return false when show slot is past on previous day for admin", () =>{
-        const currentDate=new Date("Thu Sep 22 2022 9:30:00 GMT+0530 (India Standard Time)");
-        var showDate = new Date();
-        showDate.setDate(currentDate.getDate()-1);
-        var startTime = "9:00 AM";
-        expect(isNotPreviousSlot(startTime,currentDate,showDate)).toEqual(false);
-    });
-
-    it("should return false when show slot is past on current day for admin", () =>{
-        const currentDate=new Date("Thu Sep 22 2022 9:31:00 GMT+0530 (India Standard Time)");
-        var showDate = new Date();
-        showDate.setDate(currentDate.getDate());
-        var startTime = "9:00 AM";
-        expect(isNotPreviousSlot(startTime,currentDate,showDate)).toEqual(false);
-    });
-
-    it("should return true when show slot is not past on current day for admin", () =>{
-        const currentDate=new Date("Thu Sep 22 2022 8:30:00 GMT+0530 (India Standard Time)");
-        var showDate = new Date();
-        showDate.setDate(currentDate.getDate());
-        var startTime = "9:00 AM";
-        expect(isNotPreviousSlot(startTime,currentDate,showDate)).toEqual(true);
-    });
-
-    it("should return true when show slot is on future day for admin", () =>{
-        const currentDate=new Date("Thu Sep 22 2022 8:30:00 GMT+0530 (India Standard Time)");
-        var showDate = new Date();
-        showDate.setDate(currentDate.getDate()+1);
-        var startTime = "9:00 AM";
-        expect(isNotPreviousSlot(startTime,currentDate,showDate)).toEqual(true);
-    });
     
-    it("should return true when previous day is called in url for customer", () =>{
-        const currentDate=new Date("Thu Sep 22 2022 8:30:00 GMT+0530 (India Standard Time)");
-        var showDate = new Date();
-        showDate.setDate(currentDate.getDate()-1);
-        expect(isPreviousDayShow(currentDate,showDate)).toEqual(true);
-    });
-
-    it("should return false when current day is called in url for customer", () =>{
-        const currentDate=new Date("Thu Sep 22 2022 8:30:00 GMT+0530 (India Standard Time)");
-        var showDate = new Date();
-        showDate.setDate(currentDate.getDate());
-        expect(isPreviousDayShow(currentDate,showDate)).toEqual(false);
-    });
-
-    it("should return false when future day is called in url for customer", () =>{
-        const currentDate=new Date("Thu Sep 22 2022 8:30:00 GMT+0530 (India Standard Time)");
-        var showDate = new Date();
-        showDate.setDate(currentDate.getDate()+1);
-        expect(isPreviousDayShow(currentDate,showDate)).toEqual(false);
-    });
-
-    it("should return false when next day is called in url for customer", () =>{
-        const currentDate=new Date("Thu Sep 22 2022 8:30:00 GMT+0530 (India Standard Time)");
-        var showDate = new Date();
-        showDate.setDate(currentDate.getDate()+1);
-        expect(isAfterTwoDaysShow(currentDate,showDate)).toEqual(false);
-    });
-
-    it("should return false when next to next day is called in url for customer", () =>{
-        const currentDate=new Date("Thu Sep 22 2022 8:30:00 GMT+0530 (India Standard Time)");
-        var showDate = new Date();
-        showDate.setDate(currentDate.getDate()+2);
-        expect(isAfterTwoDaysShow(currentDate,showDate)).toEqual(false);
-    });
-
-    it("should return true when after two days is called in url for customer", () =>{
-        const currentDate=new Date("Thu Sep 22 2022 8:30:00 GMT+0530 (India Standard Time)");
-        var showDate = new Date();
-        showDate.setDate(currentDate.getDate()+3);
-        expect(isAfterTwoDaysShow(currentDate,showDate)).toEqual(true);
-    });
-
-    it("should return false when after past day is called in url for customer", () =>{
-        const currentDate=new Date("Thu Sep 22 2022 8:30:00 GMT+0530 (India Standard Time)");
-        var showDate = new Date();
-        showDate.setDate(currentDate.getDate()-1);
-        expect(isAfterTwoDaysShow(currentDate,showDate)).toEqual(false);
-    });
-
-    it("Should display scheduleMovie when rendered for admin", () => {
-        jest.spyOn(Storage.prototype, 'getItem');
-        Storage.prototype.getItem = jest.fn(() => "admin");
-
-        const shows = render(<Shows history={testHistory} location={testLocation}/>);
-        
-        expect(localStorage.getItem).toHaveBeenCalled();
-        expect(shows.queryByTestId("scheduleMovieDiv")).toBeDefined();
-    });
-
-    it("Should not display scheduleMovie when rendered for customer", () => {
-        jest.spyOn(Storage.prototype, 'getItem');
-        Storage.prototype.getItem = jest.fn(() => "customer");
-
-        const shows = shallow(<Shows history={testHistory} location={testLocation}/>);
-        
-        expect(localStorage.getItem).toHaveBeenCalled();
-        expect(shows.contains("scheduleMovieDiv")).toBe(false);
-    });
 });
