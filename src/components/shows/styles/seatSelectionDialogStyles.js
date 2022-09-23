@@ -1,4 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { CenterFocusStrong } from "@material-ui/icons";
 
 export default makeStyles((theme) =>
 ({
@@ -13,6 +14,7 @@ export default makeStyles((theme) =>
     },
     dialogHeader: {
         fontWeight: "bold",
+        paddingLeft:"2.3cm",
         padding: "10px 0px 20px 10px"
     },
     dialogContent: {
@@ -53,6 +55,12 @@ export default makeStyles((theme) =>
     },
     dialogButton: {
         marginLeft: "15px"
+    },
+    alertMessage:{
+        backgroundColor: "#d9f2e5",
+        display:"flex",
+        flexDirection:"row",
+        justifyContent:"center"
     }
 })
 );

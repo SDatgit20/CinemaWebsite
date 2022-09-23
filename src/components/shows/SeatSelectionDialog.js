@@ -10,12 +10,14 @@ const SeatSelectionDialog = ({selectedShow, updateShowsRevenue, open, onClose}) 
     const [showCustomerDetails, setShowCustomerDetails] = useState(false);
     const [seats, setSeats] = useState(1);
     const [invalidSeatNumber, setInvalidSeatNumber] = useState(false);
-    const [isSeatAvailable, setIsSeatAvailable] = useState(true)
+    const [isSeatAvailable, setIsSeatAvailable] = useState(true);
     let availableSeats = 100 - selectedShow.bookedSeats
    
     const classes = styles();
 
     useEffect(() => {
+        
+
         if (seats > 20 || seats <= 0) {
             setInvalidSeatNumber(true);
         }
@@ -27,9 +29,12 @@ const SeatSelectionDialog = ({selectedShow, updateShowsRevenue, open, onClose}) 
             else {
                 setIsSeatAvailable(true)
             }
+           
 
         }
     }, [seats]);
+
+    
     const handleClose = () => {
         setSeats("1");
         onClose();
@@ -42,11 +47,14 @@ const SeatSelectionDialog = ({selectedShow, updateShowsRevenue, open, onClose}) 
             }}>
                 <div className={classes.container}>
                 <div style={{ display: "inline" }}>
-                        <div> <Typography variant="h6" className={classes.dialogHeader}>
-                        Select Seats
-                            {availableSeats < 11 ? <span style={{ color: "orange", padding: "2cm" }} >Hurry up ! Only {availableSeats} seats Available</span> : ""}
-                        </Typography></div>
-                        <div> </div>
+                        <div> 
+                        <Typography variant="h6" className={classes.alertMessage} >
+                            { availableSeats <= 10 || availableSeats<1 ? <span  >Hurry up ! Only {availableSeats} seats Available</span> : ""}
+                        </Typography>
+                        <Typography variant="h6" className={classes.dialogHeader}>
+                            Select Seats
+                        </Typography>
+                        </div>
                     </div>
                     <div className={classes.dialogContent}>
                         <div className={classes.moviePicture}>
@@ -71,9 +79,6 @@ const SeatSelectionDialog = ({selectedShow, updateShowsRevenue, open, onClose}) 
                                                    inputProps={{step: "1", min: "1", max: "20"}}
                                             onChange={(e) => setSeats(e.target.value)} />
                                     </div>
-
-
-
                                     <Typography variant="subtitle1" color="secondary">
                                         {`${INR_SYMBOL}${(selectedShow.cost * seats).toFixed(2)}`}
                                     </Typography>
@@ -97,7 +102,7 @@ const SeatSelectionDialog = ({selectedShow, updateShowsRevenue, open, onClose}) 
                                 >
                                     {invalidSeatNumber == true ? (seats <= 0 ? <p>Book atleast 1 seat</p> : <p>Seat number must be less then 20</p>) :
 
-                                        (isSeatAvailable ? "" : <p>Only {availableSeats} Available</p>)}
+                                        (isSeatAvailable ? "" : <p>Only {availableSeats} seats Available</p>)}
 
 
 
