@@ -199,15 +199,6 @@ describe("Basic rendering and functionality", () => {
     expect(isNotPreviousSlot(startTime,currentDate,showDate)).toEqual(false);
 });
 
-it("should return false when show slot is past on current day for admin", () =>{
-    const currentDate=new Date("Thu Sep 22 2022 9:50:00 GMT+0530 (India Standard Time)");
-    var showDate = new Date();
-    showDate.setDate(currentDate.getDate());
-    var startTime = "9:00 AM";
-
-    expect(isNotPreviousSlot(startTime,currentDate,showDate)).toEqual(false);
-});
-
 it("should return true when show slot is not past on current day for admin", () =>{
     const currentDate=new Date("Thu Sep 22 2022 8:30:00 GMT+0530 (India Standard Time)");
     var showDate = new Date();
