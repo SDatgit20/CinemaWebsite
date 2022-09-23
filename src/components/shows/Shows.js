@@ -33,7 +33,7 @@ export default ({ location, history }) => {
   const showsDate = dateFromSearchString(location.search);
   const { shows, showsLoading } = useShows(showsDate);
   const { showsRevenue, updateShowsRevenue, showsRevenueLoading } =
-  useShowsRevenue(showsDate);
+    useShowsRevenue(showsDate);
   const [showSelectSeatDialog, setShowSelectSeatDialog] = useState(false);
   const [showPosterDialog, setShowPosterDialog] = useState(false);
 
@@ -41,11 +41,14 @@ export default ({ location, history }) => {
   var showDate = new Date(showsDate.format(QUERY_DATE_FORMAT));
 
   useEffect(() => {
-   if((window.localStorage.getItem("rolename") === "customer") && (isPreviousDayShow(currentDate,showDate) || isAfterTwoDaysShow(currentDate,showDate))){
-    history.push("/")
-   } 
-   
-  },[showDate.getDate(),showDate.getMonth(),showDate.getFullYear()]);
+    if (
+      window.localStorage.getItem("rolename") === "customer" &&
+      (isPreviousDayShow(currentDate, showDate) ||
+        isAfterTwoDaysShow(currentDate, showDate))
+    ) {
+      history.push("/");
+    }
+  }, [showDate.getDate(), showDate.getMonth(), showDate.getFullYear()]);
 
   const emptyShow = {
     id: "",
@@ -64,27 +67,33 @@ export default ({ location, history }) => {
       startTime: "",
       endTime: "",
     },
-    "bookedSeats": ""
+    bookedSeats: "",
   };
 
-  const scheduleMovie = () =>{
+  const scheduleMovie = () => {
     return (
-        <div>
-            <a href="/schedule" className={classes.scheduleMovieIcon}>
-            <Button >Schedule Movie</Button> 
-            </a>
-        </div>
+      <div data-testid="scheduleMovieDiv">
+        <a href="/schedule" className={classes.scheduleMovieIcon}>
+          <Button>Schedule Movie</Button>
+        </a>
+      </div>
     );
-}
+  };
   const [selectedShow, setSelectedShow] = useState(emptyShow);
-  
+
   return (
     <>
       <div className={classes.cardHeader}>
         <Typography variant="h4" className={classes.showsHeader}>
           Shows ({showsDate.format(HEADER_DATE_FORMAT)})
         </Typography>
-        {scheduleMovie()}
+
+        {window.localStorage.getItem("rolename") === "customer" ? (
+          <></>
+        ) : (
+          scheduleMovie()
+        )}
+
         {window.localStorage.getItem("rolename") === "customer" ? (
           <></>
         ) : (
@@ -115,14 +124,25 @@ export default ({ location, history }) => {
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
-                className=
-                {window.localStorage.getItem("rolename") === "customer" || isNotPreviousSlot(show.slot.startTime, currentDate, showDate) ? classes.showContainer : classes.showContainerForPastTime}
+                className={
+                  window.localStorage.getItem("rolename") === "customer" ||
+                  isNotPreviousSlot(show.slot.startTime, currentDate, showDate)
+                    ? classes.showContainer
+                    : classes.showContainerForPastTime
+                }
                 primary={show.movie.name}
                 onClick={() => {
                   setSelectedShow(show);
                   {
-                    window.localStorage.getItem("rolename") === "customer" ? setShowSelectSeatDialog(true) :
-                    setShowSelectSeatDialog(isNotPreviousSlot(show.slot.startTime, currentDate, showDate));
+                    window.localStorage.getItem("rolename") === "customer"
+                      ? setShowSelectSeatDialog(true)
+                      : setShowSelectSeatDialog(
+                          isNotPreviousSlot(
+                            show.slot.startTime,
+                            currentDate,
+                            showDate
+                          )
+                        );
                   }
                 }}
                 secondary={
@@ -161,7 +181,7 @@ export default ({ location, history }) => {
       <div className={classes.buttons}>
         {window.localStorage.getItem("rolename") === "customer" ? (
           <Button
-            data-testid = "customerPreviousButton"
+            data-testid="customerPreviousButton"
             onClick={() => {
               history.push(previousDateLocation(location, showsDate));
             }}
@@ -179,7 +199,7 @@ export default ({ location, history }) => {
           </Button>
         ) : (
           <Button
-            data-testid = "adminPreviousButton"
+            data-testid="adminPreviousButton"
             onClick={() => {
               history.push(previousDateLocation(location, showsDate));
             }}
@@ -192,6 +212,7 @@ export default ({ location, history }) => {
         )}
         {window.localStorage.getItem("rolename") === "customer" ? (
           <Button
+            data-testid="customerNextButton"
             onClick={() => {
               history.push(nextDateLocation(location, showsDate));
             }}
@@ -209,6 +230,7 @@ export default ({ location, history }) => {
           </Button>
         ) : (
           <Button
+            data-testid="adminNextButton"
             onClick={() => {
               history.push(nextDateLocation(location, showsDate));
             }}
@@ -227,33 +249,41 @@ export default ({ location, history }) => {
   );
 };
 
-
-function isNotPreviousSlot(startTime, currentDate, showDate){
-    var startTimeSplit = startTime.split(':');
-    var adminBookingWindow=30*60*1000;
-    var showHours = (startTimeSplit[1][3] === 'P') ? Number(startTimeSplit[0])+12 : Number(startTimeSplit[0]);
-    var showMinutes = Number(startTimeSplit[1][0]) * 10+Number(startTimeSplit[1][1]);
-    showDate.setHours(showHours);
-    showDate.setMinutes(showMinutes);
-    showDate=new Date(showDate.getTime()+adminBookingWindow);
-    return !(showDate<=currentDate);
+export function isNotPreviousSlot(startTime, currentDate, showDate) {
+  var startTimeSplit = startTime.split(":");
+  var adminBookingWindow = 30 * 60 * 1000;
+  var showHours =
+    startTimeSplit[1][3] === "P"
+      ? Number(startTimeSplit[0]) + 12
+      : Number(startTimeSplit[0]);
+  var showMinutes =
+    Number(startTimeSplit[1][0]) * 10 + Number(startTimeSplit[1][1]);
+  showDate.setHours(showHours);
+  showDate.setMinutes(showMinutes);
+  showDate = new Date(showDate.getTime() + adminBookingWindow);
+  return !(showDate <= currentDate);
 }
 
-function isPreviousDayShow(currentDate, showDate){
-  if((showDate.getYear() < currentDate.getYear()) || (showDate.getMonth() < currentDate.getMonth()) || (showDate.getDate() < currentDate.getDate()))
-  {
+export function isPreviousDayShow(currentDate, showDate) {
+  if (
+    showDate.getYear() < currentDate.getYear() ||
+    showDate.getMonth() < currentDate.getMonth() ||
+    showDate.getDate() < currentDate.getDate()
+  ) {
     return true;
   }
+  return false;
 }
 
-function isAfterTwoDaysShow(currentDate, showDate){
- var twoDayWindow = new Date();
- twoDayWindow.setDate(currentDate.getDate()+2);
- if((showDate.getYear() > twoDayWindow.getYear()) || (showDate.getMonth() > twoDayWindow.getMonth()) || (showDate.getDate()> twoDayWindow.getDate()))
- {
-   return true;
- }
+export function isAfterTwoDaysShow(currentDate, showDate) {
+  var twoDayWindow = new Date();
+  twoDayWindow.setDate(currentDate.getDate() + 2);
+  if (
+    showDate.getYear() > twoDayWindow.getYear() ||
+    showDate.getMonth() > twoDayWindow.getMonth() ||
+    showDate.getDate() > twoDayWindow.getDate()
+  ) {
+    return true;
+  }
+  return false;
 }
-
-
-
