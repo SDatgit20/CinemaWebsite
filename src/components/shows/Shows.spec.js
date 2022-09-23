@@ -281,13 +281,4 @@ it("should return true when show slot is not past on current day for customer", 
 
     expect(isNotPreviousSlotCustomer(startTime,currentDate,showDate)).toEqual(true);
 });
-
-it("should return false when show slot is past on current day for customer", () =>{
-    const currentDate=new Date("Thu Sep 22 2022 9:20:00 GMT+0530 (India Standard Time)");
-    var showDate = new Date(currentDate);
-    const startTime = "9:00 AM";
-    
-    expect(isNotPreviousSlotCustomer(startTime,currentDate,showDate)).toEqual(false);
-});
-  
 });
