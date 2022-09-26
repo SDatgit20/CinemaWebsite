@@ -4,28 +4,8 @@ fileignoreconfig:
   ignore_detectors: [filename]
 - filename: src/components/profile/ChangePasswordDialog.js
   checksum: ec166a1235c74166618b7dc72b315c020b7e6be43818f476ee2e9fdfdf567b17
-- filename: package-lock.json
-  checksum: cb5679ee170f14d2cba12ddc6f1b44cf76ae363f632b6f17da1a613b1983a848
-- filename: src/helpers/signupService.js
-  checksum: d37cbc1c6c7078e501eb8b3738d2af494a9059ce18c203713ee7bb1b5ef9e0bc
-- filename: src/components/signup/Signup.js
-  checksum: e52345669d610206e9a78074c5fe0cb29fff9478aba545ed867a6b256713411d
-- filename: yarn.lock
-  checksum: 0c036133b839cbee2fe9ea3ad7c8972a474806aa5c71b87ca9dc9e21159f137b
-- filename: src/helpers/signupService.js
-  checksum: 9f8574a17a26fb6a58d7e3224d6b9c753c2eab4d1d7b88f63547d29c9927d30e
-- filename: src/components/signup/Signup.js
-  checksum: 46447a5ac0c9955eeeb4f430d3ca975cf0caf511ccd4317ab5f2b378322562f2
 - filename: src/components/shows/PosterDialog.spec.js
   checksum: 16624c42842df22d5f3769520ca5fb68f858811a0354fafe0bc3d4a6209211e4
-version: ""
-fileignoreconfig:
-- filename: src/components/signup/Signup.js
-  checksum: d0a818b125e5bfc837e81caf25e95acd613dae513ee48bbb76cfa81a2631170e
-- filename: src/helpers/signupService.spec.js
-  checksum: ce40835777d41b39fbb6f48c7ca0d08277f7c39001ce2ad27c1b0b823c56c3cd
-- filename: src/helpers/signupService.js
-  checksum: 75bf8a29080badfa2aeb3c730c75a750852ce695b2e6da305981b0fb1abdcf45
 version: ""
 fileignoreconfig:
 - filename: src/components/signup/Signup.spec.js
@@ -40,4 +20,8 @@ fileignoreconfig:
   checksum: c6fc5f9b3ba35a5c42cb98a630fe7c1af849634c940b4dd416bb2e40ee4d63ad
 - filename: src/components/scheduleMovie/ScheduleMovie.js
   checksum: dd48fc6300621874bbe7766f7482b96e90abac9d368106c6c267351ddfb4f944
+- filename: yarn.lock
+  checksum: 2155a56b3187c8f969bbf3a9b96b20ac812811e25b25170221cf8699572631a1
+- filename: package-lock.json
+  checksum: c6ff430d642c6190136e4b87e248feae29c45fdff19f242e2a384044b6060c96
 version: ""

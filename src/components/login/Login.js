@@ -53,18 +53,6 @@ const Login = ({ location, history, isAuthenticated, onLogin }) => {
                                     disabled={!isValid}
                                     color="primary"
                                     className={classes.loginButton}
-
-
-                                //     onclick = {window.onload = function() {
-                                //         if(!window.location.hash) {
-                                //             window.location = window.location + '#loaded';
-                                //             window.location.reload();
-                                //         }
-                                //     }
-                                // }
-
-
-
                                 >
                                     Login
                                 </Button>
