@@ -72,13 +72,13 @@ export default ({ location, history }) => {
 
   const scheduleMovie = () => {
     return (
-      <div data-testid="scheduleMovieDiv">
+      <div>
         <a href="/schedule" className={classes.scheduleMovieIcon}>
-          <Button>Schedule Movie</Button>
+          <Button className={classes.scheduleMovieButton} variant="contained" color="primary">Schedule Movie</Button>
         </a>
       </div>
     );
-  };
+  }
   const [selectedShow, setSelectedShow] = useState(emptyShow);
 
   return (
@@ -91,9 +91,11 @@ export default ({ location, history }) => {
         {window.localStorage.getItem("rolename") === "customer" ? (
           <></>
         ) : (
-          scheduleMovie()
+          <div className={classes.scheduleMovieDiv}>
+            {scheduleMovie()}
+          </div>
         )}
-
+        
         {window.localStorage.getItem("rolename") === "customer" ? (
           <></>
         ) : (

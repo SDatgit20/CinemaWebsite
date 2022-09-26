@@ -1,3 +1,4 @@
+import { blue } from "@material-ui/core/colors";
 import {makeStyles} from "@material-ui/core/styles";
 
 export default makeStyles((theme) =>
@@ -62,13 +63,24 @@ export default makeStyles((theme) =>
             padding: theme.spacing(2, 4, 3),
         },
         scheduleMovieIcon:{
-            color: theme.palette.primary.contrastText,
             display: 'flex',
             textDecoration: 'none',
-            alignItems:"center",
-            cursor: "pointer",
-            fontSize: '1.25em',
-            padding: ''
+            alignItems:"right",
+            fontSize: '1.25em'
+        },
+        scheduleMovieButton: {
+            color: "white",
+            backgroundColor: theme.palette.primary.main,
+            display: "flex",
+            alignItems: "right"
+        },
+        scheduleMovieDiv: {
+            marginTop: "16.5px",
+            width: "1000px",
+            display: "flex",
+            justifyContent: "flex-end",
+            marginRight: "20px",
+            marginLeft: "20px"
         }
     })
 );
