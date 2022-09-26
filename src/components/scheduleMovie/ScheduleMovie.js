@@ -7,10 +7,15 @@ import Moment from 'moment';
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { useHistory } from 'react-router-dom';
 import styles from './styles/scheduleMovieStyles';
+import { FeatureToggleProvider } from 'react-feature-toggles/lib/index';
+import FeatureToggle from "react-feature-toggles/lib/FeatureToggle";
+import PageNotFound from '../feature-toggle/PageNotFound';
+
 
 function Alert(props) {
   return <MuiAlert variant="filled" {...props} />;
 }
+
 
 export default () => {
   const [selectedTitle, setSelectedTitle] = useState('');
@@ -202,9 +207,24 @@ export default () => {
     }
   }
 
+  const toggleNames = {
+    SCHEDULE_MOVIE_FEATURE: 'Schedule movie feature'
+  };
+  
+  const toggles = {
+    [toggleNames.SCHEDULE_MOVIE_FEATURE]: window.localStorage.getItem("scheduleMovieStatus") == 'true'
+  };
+
   return (
+    <FeatureToggleProvider featureToggleList={toggles}>
+      <FeatureToggle featureName={toggleNames.SCHEDULE_MOVIE_FEATURE}>
     <div className="main">
       {showDropdown()}
     </div>
+    </FeatureToggle>
+    <FeatureToggle featureName={toggleNames.SCHEDULE_MOVIE_FEATURE} showOnlyWhenDisabled>
+    <PageNotFound></PageNotFound>
+    </FeatureToggle>
+    </FeatureToggleProvider>
   );
 }

@@ -100,7 +100,7 @@ const SeatSelectionDialog = ({selectedShow, updateShowsRevenue, open, onClose}) 
                                         { color: "red", padding: ".2rem" } 
                                     }
                                 >
-                                    {invalidSeatNumber == true ? (seats <= 0 ? <p>Book atleast 1 seat</p> : <p>Seat number must be less then 20</p>) :
+                                    {invalidSeatNumber === true ? (seats <= 0 ? <p>Book atleast 1 seat</p> : <p>Seat number must be less then 20</p>) :
 
                                         (isSeatAvailable ? "" : <p>Only {availableSeats} seats Available</p>)}
 

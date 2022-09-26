@@ -28,6 +28,10 @@ import ShowsRevenue from "./ShowsRevenue";
 import useShowsRevenue from "./hooks/useShowsRevenue";
 import SeatSelectionDialog from "./SeatSelectionDialog";
 import PosterDialog from "./PosterDialog";
+import { FeatureToggleProvider } from 'react-feature-toggles/lib/index';
+import FeatureToggle from "react-feature-toggles/lib/FeatureToggle";
+
+
 export default ({ location, history }) => {
   const classes = styles();
   const showsDate = dateFromSearchString(location.search);
@@ -70,13 +74,27 @@ export default ({ location, history }) => {
     bookedSeats: "",
   };
 
-  const scheduleMovie = () => {
+  const toggleNames = {
+    SCHEDULE_MOVIE_FEATURE: 'Schedule movie feature',
+    BOOK_MOVIE: 'Book Movie'
+  };
+  
+  const toggles = {
+    [toggleNames.SCHEDULE_MOVIE_FEATURE]: window.localStorage.getItem("scheduleMovieStatus") === 'true' ? true : false,
+    [toggleNames.BOOK_MOVIE]: window.localStorage.getItem("bookMovie") === 'true' ? true : false
+  };
+
+  const scheduleMovie = () =>{
     return (
-      <div>
-        <a href="/schedule" className={classes.scheduleMovieIcon}>
-          <Button className={classes.scheduleMovieButton} variant="contained" color="primary">Schedule Movie</Button>
-        </a>
-      </div>
+      <FeatureToggleProvider featureToggleList={toggles}>
+        <FeatureToggle featureName={toggleNames.SCHEDULE_MOVIE_FEATURE}>
+        <div data-testid="scheduleMovieDiv">
+            <a href="/schedule" className={classes.scheduleMovieIcon}>
+            <Button className={classes.scheduleMovieButton} variant="contained" color="primary">Schedule Movie</Button>
+            </a>
+        </div>
+        </FeatureToggle>
+      </FeatureToggleProvider>
     );
   }
   const [selectedShow, setSelectedShow] = useState(emptyShow);
@@ -133,8 +151,8 @@ export default ({ location, history }) => {
                 onClick={() => {
                   setSelectedShow(show);
                   {
-                    window.localStorage.getItem("rolename") === "customer" ? setShowSelectSeatDialog(isNotPreviousSlotCustomer(show.slot.startTime, currentDate, showDate)) :
-                    setShowSelectSeatDialog(isNotPreviousSlotAdmin(show.slot.startTime, currentDate, showDate));
+                    window.localStorage.getItem("rolename") === "customer" ? setShowSelectSeatDialog((window.localStorage.getItem("bookMovie") == 'true') && isNotPreviousSlotCustomer(show.slot.startTime, currentDate, showDate)) :
+                    setShowSelectSeatDialog((window.localStorage.getItem("bookMovie") == 'true') && isNotPreviousSlotAdmin(show.slot.startTime, currentDate, showDate));
                   }
                 }}
                 secondary={

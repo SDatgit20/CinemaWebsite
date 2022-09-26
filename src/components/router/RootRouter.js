@@ -15,19 +15,19 @@ import ScheduleMovie from "../scheduleMovie/ScheduleMovie"
 
 const RootRouter = ({isAuthenticated, onLogin}) => {
     const todayDate = moment().format("YYYY-MM-DD");
-    const title ="A Quiet Place"
-
+    
     return (
         <Router>
             <Switch>
+            
                 <Redirect path="/" exact to={`/shows?date=${todayDate}`}/>
                 <ProtectedRoute exact path="/shows" component={Shows} isAuthenticated={isAuthenticated}/>
                 <ProtectedRoute exact path="/profile" component={Profile} isAuthenticated={isAuthenticated}/>
                 <ProtectedRoute exact path="/schedule" component={ScheduleMovie} isAuthenticated={isAuthenticated}/>
                 <Route exact path="/signup" component={Signup} isAuthenticated={!isAuthenticated}/>
                 <Route exact path="/login"
-                       component={(props) => <Login isAuthenticated={isAuthenticated} onLogin={onLogin} {...props}/>}/>
-
+                       component={(props) => 
+                        <Login isAuthenticated={isAuthenticated} onLogin={onLogin} {...props}/>}/>
                 <Route exact path="/error" component={
                     () => <Error errorIcon={ErrorOutlineIcon} errorMessage={"Oops..Something went wrong"}/>
                 }
@@ -36,7 +36,7 @@ const RootRouter = ({isAuthenticated, onLogin}) => {
                 <Route component={
                     () => <Error errorIcon={BlockIcon} errorMessage={"Not Found"}/>
                 }/>
-
+            
             </Switch>
         </Router>
     );

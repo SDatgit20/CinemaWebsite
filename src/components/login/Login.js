@@ -19,6 +19,7 @@ const Login = ({ location, history, isAuthenticated, onLogin }) => {
     });
 
     return (
+        
         <div className={classes.loginContainer}>
             <Formik initialValues={initialValues}
                 onSubmit={handleLogin}
@@ -52,6 +53,18 @@ const Login = ({ location, history, isAuthenticated, onLogin }) => {
                                     disabled={!isValid}
                                     color="primary"
                                     className={classes.loginButton}
+
+
+                                //     onclick = {window.onload = function() {
+                                //         if(!window.location.hash) {
+                                //             window.location = window.location + '#loaded';
+                                //             window.location.reload();
+                                //         }
+                                //     }
+                                // }
+
+
+
                                 >
                                     Login
                                 </Button>
@@ -61,6 +74,7 @@ const Login = ({ location, history, isAuthenticated, onLogin }) => {
                 }
             </Formik>
         </div>
+        
     );
 }
 
