@@ -26,6 +26,7 @@ export default () => {
     const handleLogout = () => {
         logout();
         setIsAuthenticated(false);
+        window.location.replace("/");
     };
 
     return {

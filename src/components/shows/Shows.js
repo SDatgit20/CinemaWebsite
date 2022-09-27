@@ -73,7 +73,6 @@ export default ({ location, history }) => {
     },
     bookedSeats: "",
   };
-
   const toggleNames = {
     SCHEDULE_MOVIE_FEATURE: 'Schedule movie feature',
     BOOK_MOVIE: 'Book Movie'
