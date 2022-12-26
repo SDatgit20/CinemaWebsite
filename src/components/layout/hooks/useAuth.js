@@ -19,7 +19,6 @@ export default () => {
                 window.location = window.location + '#loaded';
                 window.location.reload();
             }
-        
         return userDetails;
     };
 

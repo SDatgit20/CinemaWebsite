@@ -31,8 +31,8 @@ const PosterDialog = ({selectedShow, open, onClose}) => {
                         </div>
                     </div>
                     <div className={classes.dialogContent}>
-                        <div className={classes.moviePicture}>
-                            <img src={selectedShow.movie.posterUrl} alt="Poster"></img>  
+                        <div>
+                            <img src={selectedShow.movie.posterUrl} alt="Poster" className={classes.moviePicture}></img>  
                         </div>   
                     </div>
                 </div>

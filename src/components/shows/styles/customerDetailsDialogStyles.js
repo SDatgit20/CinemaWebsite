@@ -27,6 +27,6 @@ export default makeStyles((theme) =>
         },
         closeCustomerDetailDialog:{
             paddingLeft:"70px"
-        }
+        },
     })
 );

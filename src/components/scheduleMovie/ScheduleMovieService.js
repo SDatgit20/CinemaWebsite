@@ -1,6 +1,5 @@
 import axios from "axios";
 import { urls } from "../../config/env-config";
-import { authHeader } from "../../helpers/authService";
 import Moment from 'moment';
 
 export const scheduleMovieService = async () => {

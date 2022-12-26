@@ -6,6 +6,10 @@ export default makeStyles((theme) =>
             overflow: "hidden",
             maxWidth:"400px"
         },
+        moviePicture: {
+            width:"250px",
+            height:"350px"
+        },
         dialogTitle: {
             padding: "25px",
             textAlign:"center",

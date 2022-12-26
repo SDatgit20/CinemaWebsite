@@ -36,6 +36,20 @@ const CustomerDetailsDialog = ({ seats, selectedShow, updateShowsRevenue, open, 
             .matches(/^[6-9]\d{9}$/, "Invalid Phone Number")
     });
 
+    function loadScript(src) {
+        return new Promise((resolve) => {
+            const script = document.createElement("script");
+            script.src = src;
+            script.onload = () => {
+                resolve(true);
+            };
+            script.onerror = () => {
+                resolve(false);
+            };
+            document.body.appendChild(script);
+        });
+    }
+
     const bookShow = async (values) => {
         const today = moment().format("YYYY-MM-DD");
         const payload = {
@@ -50,15 +64,65 @@ const CustomerDetailsDialog = ({ seats, selectedShow, updateShowsRevenue, open, 
 
         try {
             const response = await bookingService.create(payload);
-            setSuccess(true);
-            updateShowsRevenue();
-            setBookingConfirmation(response.data)
-            setShowConfirmation(true);
+            setBookingConfirmation(response.data);
+
+            const res = await loadScript(
+                "https://checkout.razorpay.com/v1/checkout.js"
+            );
+
+            if (!res) {
+                alert("Razorpay SDK failed to load. Are you online?");
+                return;
+            }
+            const orderId = response.data.orderId;
+            var rzpId;
+            const customerName = response.data.audienceName;
+            const options = {
+                key: "rzp_test_jqsL603YDLrd5J", // Enter the Key ID generated from the Dashboard
+                name: "SkyFox Media Entertainment",
+                description: "Test Transaction",
+                order_id: response.data.orderId,
+                handler: async function (response) {
+                    const data = {
+                        orderCreationId: orderId,
+                        razorpayPaymentId: response.razorpay_payment_id,
+                        razorpayOrderId: response.razorpay_order_id,
+                        razorpaySignature: response.razorpay_signature
+                    };
+                    rzpId = response.razorpay_payment_id;
+                    console.log(data);
+                    setSuccess(true);
+                    setShowConfirmation(true);
+                    updateShowsRevenue();
+                },
+                modal: {
+                    ondismiss: function () {
+                        if (rzpId === undefined)
+                            setSuccess(false);
+                    }
+                },
+                prefill: {
+                    name: customerName,
+                    contact: payload.audience.phoneNumber,
+                },
+                theme: {
+                    color: "#61dafb",
+                },
+            };
+            const paymentObject = new window.Razorpay(options);
+            try {
+                paymentObject.open();
+                console.log("success");
+            }
+            catch (e) {
+                console.log("Error " + e);
+            }
         } catch {
             setSuccess(false);
         } finally {
             onClose();
         }
+
     };
     return (
         <>

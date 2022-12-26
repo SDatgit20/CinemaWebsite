@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Snackbar, Select, MenuItem, FormControl, InputLabel, makeStyles, TextField, Dialog, DialogContent, DialogTitle, DialogActions, DialogContentText } from "@material-ui/core";
+import { Button, Snackbar, Select, MenuItem, FormControl, InputLabel, TextField, Dialog, DialogContent, DialogActions, DialogContentText } from "@material-ui/core";
 import { addDateAndSlot, scheduleMovieService } from './ScheduleMovieService';
 import { useFormik } from "formik";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -18,7 +18,7 @@ function Alert(props) {
 
 
 export default () => {
-  const [selectedTitle, setSelectedTitle] = useState('');
+  const [selectedMovieName, setSelectedMovieName] = useState('');
   const [selectedMovieId, setSelectedMovieId] = useState('');
   const [movieMap, setMovieMap] = useState([]);
   const [openMovieBox, setOpenMovieBox] = useState(false);
@@ -28,6 +28,8 @@ export default () => {
   const [dialogBox, setDialogBox] = useState(false);
   const history = useHistory();
   const classes = styles();
+
+  const[movieName,setMovieName]=useState('');
 
   const formik = useFormik({
     initialValues: {
@@ -68,10 +70,22 @@ export default () => {
     },
   });
 
-  const handleChange = (event, key) => {
-    setSelectedMovieId(key.key);
-    setSelectedTitle(event.target.value);
+  const handleNameChange=(event)=>{
+    event.target.parentElement.parentElement.children[0].children[1].style.display = '';
+    setMovieName(event.target.value);
+    setOpenMovieBox(false);
+  }
+
+  const handleFocus=(event)=>{
+    event.target.parentElement.parentElement.children[0].children[1].style.display = '';
+  }
+
+  const selectName=(event)=>{
+    setSelectedMovieName(event.target.innerText);
+    setSelectedMovieId(event.target.getAttribute('a-key'));
+    setMovieName(event.target.innerText);
     setOpenMovieBox(true);
+    event.target.parentElement.style.display='none';
   }
 
   const handleClose = () => {
@@ -124,7 +138,18 @@ export default () => {
     // let key = 0;
     return (<>
       <FormControl>
-        <InputLabel>Select a movie</InputLabel>
+        <input type='text' onChange={handleNameChange} value={movieName} onFocus={handleFocus} placeholder="Select a movie" className={classes.inp}></input>
+        <div style={{display:"none"}} className={classes.dropdown}>
+          {movieMap.map(([id, title]) => {
+            if(title.toString().toLowerCase().includes(movieName.toLowerCase())){
+            return (
+              <MenuItem value={title} key={id} onClick={selectName} a-key={id}>
+                {title}
+              </MenuItem>
+            );}
+          })}
+          </div>
+        {/* <InputLabel>Select a movie</InputLabel>
         <Select className={classes.FormControl} onChange={handleChange}>
           {movieMap.map(([id, title]) => {
             return (
@@ -133,12 +158,12 @@ export default () => {
               </MenuItem>
             );
           })}
-        </Select>
+        </Select> */}
         {
           openMovieBox ?
             <>
               <div className={classes.movieRow}>
-                <h2 className={classes.movieRowElement}>{selectedTitle}</h2>
+                <h2 className={classes.movieRowElement}>{movieName}</h2>
 
                 <div className={classes.movieRowElement}>
                   <TextField name="date" label="Date" value={formik.values.date} onChange={formik.handleChange} onBlur={formik.handleBlur} required="true" />
@@ -170,7 +195,7 @@ export default () => {
               </div>
 
               <Snackbar open={openSuccessSnackbar} autoHideDuration={3000} onClose={handleClose}>
-                <Alert severity="success">{response} - <b>{selectedTitle}</b></Alert>
+                <Alert severity="success">{response} - <b>{movieName}</b></Alert>
               </Snackbar>
 
               <Snackbar open={openErrorSnackbar} autoHideDuration={3000} onClose={handleClose}>
@@ -197,6 +222,7 @@ export default () => {
     try {
       const response = await scheduleMovieService();
       const movieMap = Object.entries(response);
+      console.log(response);
 
       setMovieMap(movieMap);
     }

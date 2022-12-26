@@ -77,9 +77,9 @@ export default ({ location, history }) => {
     SCHEDULE_MOVIE_FEATURE: 'Schedule movie feature',
     BOOK_MOVIE: 'Book Movie'
   };
-  
+  var bool=window.localStorage.getItem("scheduleMovieStatus");
   const toggles = {
-    [toggleNames.SCHEDULE_MOVIE_FEATURE]: window.localStorage.getItem("scheduleMovieStatus") === 'true' ? true : false,
+    [toggleNames.SCHEDULE_MOVIE_FEATURE]: bool===null?true:(window.localStorage.getItem("scheduleMovieStatus") === 'true' ? true : false),
     [toggleNames.BOOK_MOVIE]: window.localStorage.getItem("bookMovie") === 'true' ? true : false
   };
 
@@ -97,6 +97,7 @@ export default ({ location, history }) => {
     );
   }
   const [selectedShow, setSelectedShow] = useState(emptyShow);
+  // const showsFormat=Object.parse(shows);
 
   return (
     <>

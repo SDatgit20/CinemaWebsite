@@ -25,3 +25,10 @@ fileignoreconfig:
 - filename: package-lock.json
   checksum: c6ff430d642c6190136e4b87e248feae29c45fdff19f242e2a384044b6060c96
 version: ""
+- filename: .env
+  checksum: 5c0647cc08cad035becfcd3457d7aec336dba02b92b3e6ac8188cc7a4179eafd
+- filename: yarn.lock
+  checksum: b00f073b6bed2f539c59dba205f491e02e984a6e575a15cba479186f67309a9d
+- filename: src/components/shows/CustomerDetailsDialog.js
+  checksum: e4a076916b05fff7413abe348b853f86498c72f77b8a82318dd1e24f2835a6e6
+version: ""

@@ -1,11 +1,24 @@
 import React from 'react'
 import { Dialog, DialogContent, Typography, Button } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert/Alert";
-import styles from "./styles/customerDetailsDialogStyles"
+import styles from "./styles/customerDetailsDialogStyles";
+import QRCode from "react-qr-code";
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import TicketPdf from './TicketPdf';
+
 
 const BookingConfirmation = ({ bookingConfirmation, showConfirmation, onClose }) => {
     const classes = styles();
 
+    const fileName = "Ticket.pdf";
+
+    var bookingQrResponse = "Booking summary" + '\n' +
+        "Booking id:" + bookingConfirmation.id + '\n' +
+        "Show Date:" + bookingConfirmation.showDate + '\n' +
+        "Show start time:" + bookingConfirmation.startTime + '\n' +
+        "Customer Name:" + bookingConfirmation.audienceName + '\n' +
+        "Amount Paid:" + bookingConfirmation.amountPaid + '\n' +
+        "Number of seats booked:" + bookingConfirmation.noOfSeats;
     return (
         <Dialog open={showConfirmation} onClose={onClose} fullWidth classes={{
             paper: classes.dialogRoot
@@ -17,7 +30,9 @@ const BookingConfirmation = ({ bookingConfirmation, showConfirmation, onClose })
                 Booking Confirmation
             </Typography>
             <DialogContent>
-                <Typography variant="body1" display="block" gutterBottom>
+                <QRCode value={bookingQrResponse}
+                // <>
+                /* <Typography variant="body1" display="block" gutterBottom>
                     Booking id : {bookingConfirmation.id}
                 </Typography>
                 <Typography variant="body1" display="block" gutterBottom>
@@ -34,8 +49,29 @@ const BookingConfirmation = ({ bookingConfirmation, showConfirmation, onClose })
                 </Typography>
                 <Typography variant="body1" display="block" gutterBottom>
                     Number of seats booked: {bookingConfirmation.noOfSeats}
-                </Typography>
+                </Typography></>} */
+                />
                 <div className={classes.closeBookingConfirmation}>
+                        <PDFDownloadLink
+                            document={<TicketPdf details={bookingConfirmation}/>}
+                            fileName={fileName}
+                            style={{
+                                textDecoration: "none",
+                                padding: "10px",
+                                color: "white",
+                                backgroundColor: "#556cd6",
+                                paddingRight: "10px",
+                                marginTop: "16px",
+                                marginRight: "48px",
+                                paddingLeft: "10px",
+                                paddingTop: "9px",
+                                borderRadius:"4px",
+                                paddingBottom: "0px",
+                            }
+                              }
+                        >
+                            Download ticket
+                        </PDFDownloadLink>
                     <Button type="button" color="primary" variant="contained"
                         className={classes.bookShowButton} data-testid="bookButton" onClick={onClose}>
                         Close
